@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cms-app
+  labels:
+    app: cms-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cms-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: cms-app
+    spec:
+      containers:
+        - name: cms-app
+          image: eu.gcr.io/josefs-cms/cms-app-prod:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80

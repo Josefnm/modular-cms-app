@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+  name: cms-app-service
+  labels:
+    app: cms-app
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: cms-app
+  type: LoadBalancer
+  loadBalancerIP: 35.241.141.223

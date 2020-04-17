@@ -1,0 +1,21 @@
+#FROM node:12-alpine
+
+#WORKDIR /app
+
+#COPY ./package.json ./
+
+#RUN yarn build
+
+#COPY . .
+
+#CMD yarn start
+
+FROM node:12 as react-build
+WORKDIR /app
+COPY . ./
+RUN yarn
+RUN yarn build
+FROM nginx:alpine
+COPY --from=react-build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
