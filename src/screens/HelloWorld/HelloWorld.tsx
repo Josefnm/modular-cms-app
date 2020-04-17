@@ -5,8 +5,8 @@ import { Action } from 'redux'
 import { MainState } from '../../store/reducers'
 import * as actions from '../../store/actions'
 import { CenterContainer, StyledText } from './styled'
-import { client, clientNoAuth } from '../../network/axios-client'
-
+import { clientNoAuth } from '../../network/axios-client'
+import axios from 'axios'
 type StateProps = ReturnType<typeof mapStateToProps>
 type DispatchProps = ReturnType<typeof mapDispatchToProps>
 type OwnProps = {}
@@ -15,7 +15,17 @@ type Props = OwnProps & StateProps & DispatchProps
 const HelloWorld: FunctionComponent<Props> = ({ greeting, onSetGreeting, onResetAppState }) => {
   const setGreeting = () =>
     greeting === 'goodbye world' ? onSetGreeting('hello world') : onSetGreeting('goodbye world')
-  console.log(clientNoAuth.get('/users').then(e => e))
+  clientNoAuth.get('/users/cross').then(e => {
+    console.log(e)
+  })
+  clientNoAuth.get('/users').then(e => {
+    console.log(e)
+  })
+  axios.get('http://35.195.191.106:8080/users').then(e=>{
+    console.log(e)
+  })
+
+  console.log(clientNoAuth)
   console.log(process.env)
   return (
     <CenterContainer>
