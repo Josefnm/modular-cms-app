@@ -16,6 +16,7 @@ const HelloWorld: FunctionComponent<Props> = ({ greeting, onSetGreeting, onReset
   const setGreeting = () =>
     greeting === 'goodbye world' ? onSetGreeting('hello world') : onSetGreeting('goodbye world')
   console.log(clientNoAuth.get('/users').then(e => e))
+  console.log(process.env)
   return (
     <CenterContainer>
       <StyledText>{greeting}</StyledText>
