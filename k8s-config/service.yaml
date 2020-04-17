@@ -15,4 +15,4 @@ spec:
   selector:
     app: cms-app
   type: LoadBalancer
-  loadBalancerIP: 35.241.141.223
+
