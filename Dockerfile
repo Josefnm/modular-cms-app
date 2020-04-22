@@ -1,15 +1,3 @@
-#FROM node:12-alpine
-
-#WORKDIR /app
-
-#COPY ./package.json ./
-
-#RUN yarn build
-
-#COPY . .
-
-#CMD yarn start
-
 FROM node:12 as react-build
 WORKDIR /app
 COPY . ./
