@@ -6,8 +6,11 @@ import { Link } from 'react-router-dom'
 import { MainState } from '../../store/reducers'
 import * as actions from '../../store/actions'
 import { CenterContainer, StyledText } from './styled'
-import { clientNoAuth } from '../../network/axios-client'
-
+import { client, clientNoAuth } from '../../network/axios-client'
+import { uploadImage } from '../../config/firebase'
+import * as firebase from 'firebase/app'
+import 'firebase/auth'
+import Modal from '../../components/modal'
 type StateProps = ReturnType<typeof mapStateToProps>
 type DispatchProps = ReturnType<typeof mapDispatchToProps>
 type OwnProps = {}
@@ -41,13 +44,41 @@ const HelloWorld: FunctionComponent<Props> = ({ greeting, onSetGreeting, onReset
       console.log(e)
     }
   }
+  const search = async () => {
+    console.log(firebase.auth().currentUser)
+    try {
+      /*
+      const res = await client.post('/content', {
+        ownerId: firebase.auth().currentUser.uid,
+        contentFields: [
+          {
+            dataType: 'STRING',
+            data: true,
+          },
+        ],
+      })
+      */
+
+      const res = await client.get('/content/getContent/5ea706707150b23c84565485')
+      console.log('res', res.data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   const onNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value)
   }
 
+  const saveImage = (event: ChangeEvent<HTMLInputElement>) => {
+    uploadImage('test', event.target.files[0])
+  }
+  const [isOpen, setIsOpen] = useState(true)
   return (
     <CenterContainer>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+        <div style={{ width: 500, height: 500, background: 'green' }}>{greeting}</div>
+      </Modal>
       <StyledText>{greeting}</StyledText>
       <button type="button" onClick={setGreeting}>
         hello
@@ -60,8 +91,12 @@ const HelloWorld: FunctionComponent<Props> = ({ greeting, onSetGreeting, onReset
       <button type="button" onClick={saveUser}>
         save user
       </button>
+      <button type="button" onClick={search}>
+        search content
+      </button>
       <div> {user ? `id: ${user.id}` : ''}</div>
       <div> {user ? `name: ${user.userName}` : ''}</div>
+      <input type="file" id="multi" onChange={saveImage} multiple />
     </CenterContainer>
   )
 }
