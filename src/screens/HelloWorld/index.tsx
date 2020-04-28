@@ -3,14 +3,15 @@ import { connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
 import { Link } from 'react-router-dom'
+import * as firebase from 'firebase/app'
 import { MainState } from '../../store/reducers'
 import * as actions from '../../store/actions'
 import { CenterContainer, StyledText } from './styled'
 import { client, clientNoAuth } from '../../network/axios-client'
 import { uploadImage } from '../../config/firebase'
-import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import Modal from '../../components/modal'
+
 type StateProps = ReturnType<typeof mapStateToProps>
 type DispatchProps = ReturnType<typeof mapDispatchToProps>
 type OwnProps = {}
@@ -27,6 +28,7 @@ const HelloWorld: FunctionComponent<Props> = ({ greeting, onSetGreeting, onReset
     greeting === 'goodbye world' ? onSetGreeting('hello world') : onSetGreeting('goodbye world')
 
   useEffect(() => {
+    console.log(process.env)
     clientNoAuth.get('/users/cross').then(e => {
       console.log(e)
     })
@@ -73,7 +75,7 @@ const HelloWorld: FunctionComponent<Props> = ({ greeting, onSetGreeting, onReset
   const saveImage = (event: ChangeEvent<HTMLInputElement>) => {
     uploadImage('test', event.target.files[0])
   }
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <CenterContainer>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>

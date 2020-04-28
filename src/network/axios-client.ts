@@ -3,13 +3,13 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 
 export const client = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}/api`,
+  baseURL: `http://gosef.se/api`,
   timeout: 5000,
   headers: { 'Content-type': 'application/json' },
 })
 
 export const clientNoAuth = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}/api`,
+  baseURL: `http://gosef.se/api`,
   timeout: 5000,
   headers: { 'Content-type': 'application/json' },
 })
