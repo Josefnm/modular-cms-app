@@ -5,7 +5,7 @@ import imageCompression from 'browser-image-compression'
 
 export const initializeFirebaseAuth = () => {
   firebase.initializeApp({
-    apiKey: process.env.RACT_APP_FIREBASE_API_KEY,
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: 'josefs-cms.firebaseapp.com',
     databaseURL: 'https://josefs-cms.firebaseio.com',
     projectId: 'josefs-cms',

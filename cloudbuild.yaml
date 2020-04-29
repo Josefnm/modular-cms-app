@@ -5,6 +5,7 @@ steps:
       - "--cache=true"
       - "--cache-ttl=96h"
       - "--build-arg=REACT_APP_FIREBASE_API_KEY=${_FIREBASE_API_KEY}"
+      - "--build-arg=REACT_APP_API_URL=${_API_KEY}"
 
   - name: gcr.io/cloud-builders/gke-deploy:stable
     args:
