@@ -1,11 +1,10 @@
 steps:
-
   - name: gcr.io/kaniko-project/executor:latest
     args:
-      - "--destination=eu.gcr.io/$PROJECT_ID/$_IMAGE_NAME"
+      - "--destination=eu.gcr.io/$PROJECT_ID/${_IMAGE_NAME}"
       - "--cache=true"
       - "--cache-ttl=96h"
-      - "--build-arg=TEST=isItWorking"
+      - "--build-arg=REACT_APP_FIREBASE_API_KEY=${_FIREBASE_API_KEY}"
 
   - name: gcr.io/cloud-builders/gke-deploy:stable
     args:
