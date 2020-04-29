@@ -1,4 +1,7 @@
 FROM node:12 as react-build
+
+ENV REACT_APP_TEST=3000
+
 WORKDIR /app
 COPY . ./
 RUN yarn
