@@ -5,9 +5,9 @@ import { ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import validation from '../../utils/validation'
-import { MainState } from '../../store/reducers'
-import * as actions from '../../store/actions'
+import validation from '../../../utils/validation'
+import { MainState } from '../../../store/reducers'
+import * as actions from '../../../store/actions'
 import { Container } from './styled'
 
 export type SignupForm = {

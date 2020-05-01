@@ -10,7 +10,7 @@ import { CenterContainer, StyledText } from './styled'
 import { client, clientNoAuth } from '../../network/axios-client'
 import { uploadImage } from '../../config/firebase'
 import 'firebase/auth'
-import Modal from '../../components/modal'
+import Modal from '../../components/Modal'
 
 type StateProps = ReturnType<typeof mapStateToProps>
 type DispatchProps = ReturnType<typeof mapDispatchToProps>
@@ -29,7 +29,7 @@ const HelloWorld: FunctionComponent<Props> = ({ greeting, onSetGreeting, onReset
 
   useEffect(() => {
     console.log(process.env)
-    clientNoAuth.get('/users/cross').then(e => {
+    clientNoAuth.get('/user/cross').then(e => {
       console.log(e)
     })
   }, [])
@@ -39,7 +39,7 @@ const HelloWorld: FunctionComponent<Props> = ({ greeting, onSetGreeting, onReset
 
   const saveUser = async () => {
     try {
-      const res = await clientNoAuth.post('/users', { userName })
+      const res = await clientNoAuth.post('/user', { userName })
       console.log('res', res.data)
       setUser(res.data)
     } catch (e) {

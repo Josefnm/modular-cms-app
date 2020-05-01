@@ -17,6 +17,8 @@ const NavBar: FunctionComponent<Props> = ({ userName }) => {
       <StyledLink to="/">home</StyledLink>
       <StyledLink to="/signup">Signup</StyledLink>
       <StyledLink to="/login">Login</StyledLink>
+      <StyledLink to="/templates">Template</StyledLink>
+      <StyledLink to="/templates/create">Create Template</StyledLink>
       <div>Welcome, {userName}</div>
     </Container>
   )

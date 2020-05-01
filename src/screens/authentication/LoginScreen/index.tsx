@@ -4,9 +4,9 @@ import * as yup from 'yup'
 import { ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
 import { connect } from 'react-redux'
-import validation from '../../utils/validation'
-import { MainState } from '../../store/reducers'
-import * as actions from '../../store/actions'
+import validation from '../../../utils/validation'
+import { MainState } from '../../../store/reducers'
+import * as actions from '../../../store/actions'
 
 export type LoginForm = {
   email: string

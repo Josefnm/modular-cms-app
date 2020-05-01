@@ -1,14 +1,14 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import { MainState } from '../reducers'
-import { SignupForm } from '../../screens/SignupScreen'
+import { SignupForm } from '../../screens/authentication/SignupScreen'
 import 'firebase/auth'
 import { client, clientNoAuth } from '../../network/axios-client'
 import * as ActionTypes from './ActionTypes'
 import { UserModel } from '../reducers/user.reducers'
 import * as actions from '.'
-import { LoginForm } from '../../screens/LoginScreen'
+import { LoginForm } from '../../screens/authentication/LoginScreen'
 
 const signupSuccess = (user: UserModel) => {
   return {
@@ -41,13 +41,12 @@ const loginFail = (error: string) => {
 export const signup = (form: SignupForm) => {
   return async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
     try {
-      const response = await clientNoAuth.post('/users/signup', form)
+      const response = await clientNoAuth.post('/user/signup', form)
       const user = response.data
       await firebaseLogin(form)
       dispatch(signupSuccess(user))
     } catch (error) {
       dispatch(signupFail(error.message))
-      throw new Error(`Cant sign up: ${error.message}`)
     }
   }
 }
@@ -57,13 +56,12 @@ export const login = (form: LoginForm) => {
     try {
       await firebaseLogin(form)
 
-      const response = await client.get('/users/getProfile')
+      const response = await client.get('/user/getProfile')
       const user = response.data
 
       dispatch(loginSuccess(user))
     } catch (error) {
       dispatch(loginFail(error.message))
-      throw new Error(`Cant sign up: ${error.message}`)
     }
   }
 }

@@ -20,26 +20,26 @@ const getOwnTemplatesFail = (error: string) => {
   }
 }
 
-export const getOwnTemplates = () => {
-  return async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
-    try {
-      const response = await client.get('/templates/getOwn')
-      const templates = response.data
-      dispatch(getOwnTemplatesSuccess(templates))
-    } catch (error) {
-      dispatch(getOwnTemplatesFail(error.message))
-      throw new Error(`Cant sign up: ${error.message}`)
-    }
+export const getOwnTemplates = () => async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
+  try {
+    const response = await client.get('/template/user')
+    const templates = response.data
+    dispatch(getOwnTemplatesSuccess(templates))
+  } catch (error) {
+    dispatch(getOwnTemplatesFail(error.message))
   }
 }
 
-export const createTemplate = (template: TemplateModel) => async (dispatch: Dispatch) => {
+export const createTemplate = (template: TemplateModel) => async (
+  dispatch: ThunkDispatch<MainState, {}, Action>
+) => {
   try {
-    const response = await client.post(`/templates`, template)
+    const response = await client.post(`/template`, template)
+    console.log(response)
     dispatch(createEventSuccess(response.data))
   } catch (error) {
+    console.log(error)
     dispatch(createEventFail(error.message))
-    throw new Error(`Cant create event: ${error.message}`)
   }
 }
 
