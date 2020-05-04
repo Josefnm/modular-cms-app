@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import colors from '../../../styles/colors'
 import { ButtonBase } from '../../buttons'
-import { Heading4 } from '../../../styles/text'
+import { Heading3 } from '../../../styles/text'
 
-export const Button = styled(ButtonBase)`
+export const FieldTypeButton = styled(ButtonBase)`
+  white-space: normal;
   margin: 0 10px;
   background: transparent;
   padding: 10px;
@@ -30,7 +31,7 @@ export const IconContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.08) 0 1px 3px;
 `
 
-export const StyledHeading4 = styled(Heading4)`
+export const StyledHeading3 = styled(Heading3)`
   color: ${colors.grey2};
   font-weight: 400;
   margin-left: 0;

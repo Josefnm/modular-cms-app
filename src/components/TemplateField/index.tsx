@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react'
+import React, { FunctionComponent } from 'react'
 import { FieldArrayRenderProps } from 'formik'
 import {
   Container,
@@ -12,14 +12,12 @@ import colors from '../../styles/colors'
 import { Heading3 } from '../../styles/text'
 import { DataType, fieldTypes } from '../../models/dataType'
 import { TemplateFieldModel } from '../../store/reducers/template.reducers'
-import FieldType from '../FieldPicker/FieldType'
 
-type OwnProps = {
+type Props = {
   templateField: TemplateFieldModel
   arrayHelpers: FieldArrayRenderProps
   index: number
 }
-type Props = OwnProps
 
 const iconStyle = {
   size: 25,

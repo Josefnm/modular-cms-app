@@ -2,6 +2,7 @@ body {
   background-color: #ffffff;
   margin: 0;
   padding: 0;
+  color: #2a3039;
   font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,8 +11,28 @@ body {
   height: 100%;
 }
 
-.button:focus{
+html,
+body,
+#root,
+#root > div {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-    outline: none;
+#root > div {
+  display: flex;
+  flex-direction: column;
+}
 
+button {
+  color: #2a3039;
+  outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+a {
+  color: #2a3039;
+  text-decoration: none;
 }

@@ -11,15 +11,6 @@ type MarginProps = {
   marginHorizontal?: number
 }
 
-const size = {
-  h1: 2,
-  h2: 1.75,
-  h3: 1.5,
-  h4: 1.25,
-  h5: 1,
-  h6: 0.75,
-}
-
 const marginProps = css<MarginProps>`
    margin: 0;
   ${({ margin }) => margin && `margin: ${margin}px`}
@@ -33,40 +24,57 @@ const marginProps = css<MarginProps>`
     marginVertical && `margin-top: ${marginVertical}px; margin-bottom:${marginVertical}px;`}
 `
 
-const textProps = css`
-  color: ${colors.grey1};
+type ColorProps = {
+  white?: boolean
+  blue?: boolean
+  grey?: boolean
+}
+
+export const textColors = {
+  base: '#2A3039',
+  white: '#ffffff',
+  blue: '#3C7FCF',
+  grey: '#536171',
+}
+
+const colorProps = css<ColorProps>`
+  ${props => props.white && `color: ${textColors.white};`}
+  ${props => props.blue && `color: ${textColors.blue};`}
+  ${props => props.grey && `color: ${textColors.grey};`}
 `
 
+type TextProps = ColorProps & MarginProps
+
 const textBase = css`
-  ${textProps}
+  ${colorProps}
   ${marginProps}
 `
 
-export const Heading1 = styled.h1<MarginProps>`
+export const Heading1 = styled.h1<TextProps>`
   font-weight: 700;
   ${textBase};
 `
 
-export const Heading2 = styled.h2<MarginProps>`
+export const Heading2 = styled.h2<TextProps>`
   font-weight: 700;
   ${textBase};
 `
 
-export const Heading3 = styled.h3<MarginProps>`
+export const Heading3 = styled.h3<TextProps>`
   font-weight: 700;
   ${textBase};
 `
 
-export const Heading4 = styled.h4<MarginProps>`
+export const Heading4 = styled.h4<TextProps>`
   font-weight: 700;
   ${textBase};
 `
-export const Heading5 = styled.h5<MarginProps>`
-  font-weight: 500;
+export const Heading5 = styled.h5<TextProps>`
+  font-weight: 600;
   ${textBase};
 `
 
-export const Heading6 = styled.h6<MarginProps>`
+export const Heading6 = styled.h6<TextProps>`
   font-weight: 700;
   ${textBase};
 `

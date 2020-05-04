@@ -1,12 +1,11 @@
 import React, { Dispatch, FunctionComponent, SetStateAction } from 'react'
 import { Container } from './styled'
 
-type OwnProps = {
+type Props = {
   isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
   onClose?: () => any
 }
-type Props = OwnProps
 
 const Modal: FunctionComponent<Props> = ({ isOpen, children, setIsOpen, onClose }) => {
   if (!isOpen) return null

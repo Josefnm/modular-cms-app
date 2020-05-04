@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Form } from 'formik'
 import colors from '../../styles/colors'
 
 export const Container = styled.div`
@@ -20,14 +19,4 @@ export const FieldContainer = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
-`
-
-export const ButtonContainer = styled.div`
-  padding-bottom: 30px;
-  background-color: white;
-  display: flex;
-`
-
-export const StyledForm = styled(Form)`
-  width: 100%;
 `

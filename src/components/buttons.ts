@@ -3,12 +3,15 @@ import colors from '../styles/colors'
 
 type props = {
   margin?: string
+  width?: number
 }
 
 export const ButtonBase = styled.button<props>`
-  font-size: 0.83em;
+  white-space: nowrap;
+  padding: 0;
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.75 : 1)};
+  ${({ width }) => width && `width:${width}px`};
   :focus {
     outline: none;
   }

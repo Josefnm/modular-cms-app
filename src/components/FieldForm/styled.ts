@@ -6,7 +6,7 @@ export const StyledForm = styled(Form)`
 `
 
 export const ButtonContainer = styled.div`
-  padding-bottom: 30px;
+  padding-top: 15px;
   background-color: white;
   display: flex;
 `

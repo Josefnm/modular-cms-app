@@ -7,13 +7,11 @@ import { GreenSquareButton, SquareButton } from '../buttons'
 import { DataType } from '../../models/dataType'
 import { ButtonContainer, StyledForm } from './styled'
 
-type OwnProps = {
+type Props = {
   usedNames: string[]
   onSubmit: (values: FieldTypeForm) => void
   setDataType: Dispatch<SetStateAction<DataType>>
 }
-
-type Props = OwnProps
 
 type FieldTypeForm = {
   fieldName: string

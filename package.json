@@ -19,6 +19,7 @@
     "core-js": "^3.6.4",
     "firebase": "^7.14.1",
     "formik": "^2.1.4",
+    "moment": "^2.25.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-icons": "^3.10.0",

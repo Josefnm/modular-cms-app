@@ -28,7 +28,6 @@ const HelloWorld: FunctionComponent<Props> = ({ greeting, onSetGreeting, onReset
     greeting === 'goodbye world' ? onSetGreeting('hello world') : onSetGreeting('goodbye world')
 
   useEffect(() => {
-    console.log(process.env)
     clientNoAuth.get('/user/cross').then(e => {
       console.log(e)
     })

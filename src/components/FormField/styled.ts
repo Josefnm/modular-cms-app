@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { ErrorMessage, Field } from 'formik'
 import colors from '../../styles/colors'
 
-
 type LabelProps = {
   width?: number
 }
@@ -10,18 +9,15 @@ type LabelProps = {
 export const Label = styled.label<LabelProps>`
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
   display: flex;
-  margin-bottom: 10px;
-  ${({ width }) => width && `width:${width}px`}
+  ${({ width }) => width && `width:${width}px`};
 `
 
 export const StyledField = styled(Field)`
-  padding: 0;
+  padding: 0 5px;
   height: ${({ component }) => (component === 'textarea' ? 100 : 25)}px;
   font-size: 16px;
-  margin: 10px 0;
-  width: 100%;
+  margin-top: 10px;
   resize: vertical;
   border: 1px solid ${colors.grey4};
 `

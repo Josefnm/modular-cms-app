@@ -1,39 +1,53 @@
 import React, { FunctionComponent, useCallback, useEffect } from 'react'
-import { ThunkDispatch } from 'redux-thunk'
-import { Action } from 'redux'
-import { connect } from 'react-redux'
-import { MainState } from '../../../store/reducers'
 import * as actions from '../../../store/actions'
-import { TemplateModel } from '../../../store/reducers/template.reducers'
+import { Container, HeaderTableCell, StyledTable, TableCell, TemplateTableHeader } from './styled'
+import { useSelector, useThunkDispatch } from '../../../hooks/redux'
 
-type StateProps = ReturnType<typeof mapStateToProps>
-type DispatchProps = ReturnType<typeof mapDispatchToProps>
-type OwnProps = {}
-type Props = OwnProps & StateProps & DispatchProps
+type Props = {}
 
-const TemplateScreen: FunctionComponent<Props> = ({ onGetOwnTemplates, userTemplates }) => {
+const TemplateScreen: FunctionComponent<Props> = () => {
+  const userTemplates = useSelector(state => state.template.userTemplates)
+  const userId = useSelector(state => state.user.profile.id)
+  const dispatch = useThunkDispatch()
   useEffect(() => {
-    onGetOwnTemplates()
-  }, [onGetOwnTemplates])
+    dispatch(actions.getTemplates())
+  }, [dispatch])
+
+  const ownerName = useCallback(
+    (ownerId: string) => {
+      return userId === ownerId ? 'Me' : ownerId
+    },
+    [userId]
+  )
 
   const templates = useCallback(() => {
-    return userTemplates.map(template => <li>{template.id}</li>)
-  }, [userTemplates])
+    return userTemplates.map((template, index) => (
+      <tr key={template.id}>
+        <TableCell>{template.name}</TableCell>
+        <TableCell>{template.description}</TableCell>
+        <TableCell>{template.templateFields.length}</TableCell>
+        <TableCell>{template.created}</TableCell>
+        <TableCell>{ownerName(template.ownerId)}</TableCell>
+      </tr>
+    ))
+  }, [ownerName, userTemplates])
 
-  return <ul>{templates()}</ul>
+  return (
+    <Container>
+      <StyledTable>
+        <TemplateTableHeader>
+          <tr>
+            <HeaderTableCell>Name</HeaderTableCell>
+            <HeaderTableCell>Description</HeaderTableCell>
+            <HeaderTableCell>Fields</HeaderTableCell>
+            <HeaderTableCell>Created</HeaderTableCell>
+            <HeaderTableCell>By</HeaderTableCell>
+          </tr>
+        </TemplateTableHeader>
+        <tbody>{templates()}</tbody>
+      </StyledTable>
+    </Container>
+  )
 }
 
-const mapStateToProps = (state: MainState) => {
-  return {
-    userTemplates: state.template.userTemplates,
-  }
-}
-
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, Action>) => {
-  return {
-    onGetOwnTemplates: () => dispatch(actions.getOwnTemplates()),
-    onCreateTemplate: (template: TemplateModel) => dispatch(actions.createTemplate(template)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TemplateScreen)
+export default TemplateScreen

@@ -1,7 +1,5 @@
 import React, { FunctionComponent, useCallback, useState } from 'react'
-import { ThunkDispatch } from 'redux-thunk'
-import { Action } from 'redux'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { BsPuzzle } from 'react-icons/bs'
 import * as yup from 'yup'
 import { FieldArray, FieldArrayRenderProps, Formik } from 'formik'
@@ -23,37 +21,43 @@ import Modal from '../../../components/Modal'
 import FieldPicker from '../../../components/FieldPicker'
 import validation from '../../../utils/validation'
 import TemplateField from '../../../components/TemplateField'
-import NamePicker from '../../../components/NamePicker'
+import NamePicker, { TitleForm } from '../../../components/NamePicker'
+import { useThunkDispatch } from '../../../hooks/redux'
 
 export type TemplateForm = {
-  name: string
-  description?: string
   templateFields: TemplateFieldModel[]
 }
 
-type StateProps = ReturnType<typeof mapStateToProps>
-type DispatchProps = ReturnType<typeof mapDispatchToProps>
-type OwnProps = {}
-type Props = OwnProps & StateProps & DispatchProps
+type Props = {}
 
-const CreateTemplateScreen: FunctionComponent<Props> = ({ userTemplates, onCreateTemplate }) => {
+const CreateTemplateScreen: FunctionComponent<Props> = () => {
+  const history = useHistory()
+  const dispatch = useThunkDispatch()
+
+  const userTemplates = useSelector((state: MainState) => state.template.userTemplates)
+
   const [fieldPickerOpen, setFieldPickerOpen] = useState(false)
   const [createTemplateOpen, setCreateTemplateOpen] = useState(true)
-  const history = useHistory()
+  const [templateTitle, setTemplateTitle] = useState<TitleForm>({
+    name: '',
+    description: '',
+  })
+
   const onSubmit = (form: TemplateForm) => {
     const template: TemplateModel = {
       projectId: 'placeholder',
+      ...templateTitle,
       ...form,
     }
-    onCreateTemplate(template)
+    dispatch(actions.createTemplate(template))
   }
 
   const usedTemplateNames = useCallback(() => {
     return userTemplates.map(ut => ut.name)
   }, [userTemplates])
 
-  const templateFields = (values: TemplateFieldModel[], arrayHelpers: FieldArrayRenderProps) =>
-    values.map((templateField, index) => (
+  const templateFields = (values: TemplateFieldModel[], arrayHelpers: FieldArrayRenderProps) => {
+    return values.map((templateField, index) => (
       <TemplateField
         key={templateField.name}
         index={index}
@@ -61,12 +65,10 @@ const CreateTemplateScreen: FunctionComponent<Props> = ({ userTemplates, onCreat
         templateField={templateField}
       />
     ))
-
+  }
   return (
     <Formik<TemplateForm>
       initialValues={{
-        name: '',
-        description: '',
         templateFields: [],
       }}
       onSubmit={onSubmit}
@@ -74,7 +76,7 @@ const CreateTemplateScreen: FunctionComponent<Props> = ({ userTemplates, onCreat
         templateFields: validation.fieldArray,
       })}
     >
-      {({ values, setFieldValue }) => (
+      {({ values }) => (
         <FieldArray
           name="templateFields"
           render={arrayHelpers => (
@@ -83,8 +85,8 @@ const CreateTemplateScreen: FunctionComponent<Props> = ({ userTemplates, onCreat
                 <Header>
                   <HeaderPadding>
                     <BsPuzzle size={40} style={{ color: colors.greenLight }} />
-                    <Heading2 marginHorizontal={10}>{values.name || 'Untitled'}</Heading2>
-                    <Heading5 marginHorizontal={10}>{values.description}</Heading5>
+                    <Heading2 marginHorizontal={10}>{templateTitle.name || 'Untitled'}</Heading2>
+                    <Heading5 marginHorizontal={10}>{templateTitle.description}</Heading5>
                     <LinkButton onClick={() => setCreateTemplateOpen(true)}>Edit</LinkButton>
                   </HeaderPadding>
                   <HeaderPadding>
@@ -119,8 +121,8 @@ const CreateTemplateScreen: FunctionComponent<Props> = ({ userTemplates, onCreat
                 <NamePicker
                   setModalOpen={setCreateTemplateOpen}
                   usedNames={usedTemplateNames()}
-                  setFieldValue={setFieldValue}
-                  values={values}
+                  setTitle={setTemplateTitle}
+                  title={templateTitle}
                 />
               </Modal>
             </>
@@ -131,16 +133,4 @@ const CreateTemplateScreen: FunctionComponent<Props> = ({ userTemplates, onCreat
   )
 }
 
-const mapStateToProps = (state: MainState) => {
-  return {
-    userTemplates: state.template.userTemplates,
-  }
-}
-
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, Action>) => {
-  return {
-    onCreateTemplate: (template: TemplateModel) => dispatch(actions.createTemplate(template)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTemplateScreen)
+export default CreateTemplateScreen

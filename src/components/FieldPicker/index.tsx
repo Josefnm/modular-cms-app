@@ -10,13 +10,11 @@ type FieldTypeForm = {
   fieldName: string
 }
 
-type OwnProps = {
+type Props = {
   pushField: (fieldModel: TemplateFieldModel) => void
   usedNames: string[]
   setModalOpen: Dispatch<SetStateAction<boolean>>
 }
-
-type Props = OwnProps
 
 const FieldPicker: FunctionComponent<Props> = ({ pushField, usedNames, setModalOpen }) => {
   const fields = useCallback(() => {

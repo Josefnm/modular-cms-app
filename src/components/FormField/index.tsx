@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import { Label, StyledErrorMessage, StyledField } from './styled'
+import { Heading5 } from '../../styles/text'
 
-type OwnProps = {
+type Props = {
   name: string
   width?: number
   label?: string
@@ -9,7 +10,6 @@ type OwnProps = {
   placeholder?: string
   component?: string
 }
-type Props = OwnProps
 
 const FormField: FunctionComponent<Props> = ({
   name,
@@ -21,12 +21,12 @@ const FormField: FunctionComponent<Props> = ({
 }) => {
   return (
     <Label htmlFor={name} width={width}>
-      {label}
+      {label && <Heading5 marginTop={10}>{label}</Heading5>}
       <StyledField
         id={name}
         name={name}
         type={type}
-        placeholer={placeholder}
+        placeholder={placeholder}
         component={component}
       />
       <StyledErrorMessage name={name} component="div" />

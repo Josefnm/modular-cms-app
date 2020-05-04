@@ -1,40 +1,25 @@
 import React, { FunctionComponent } from 'react'
-import { connect } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { Action } from 'redux'
-import { MainState } from '../../store/reducers'
 import * as actions from '../../store/actions'
-import { Container, StyledLink } from './styled'
+import { Container, StyledButton, StyledLink } from './styled'
+import SideBar from '../SideBar'
+import { useSelector, useThunkDispatch } from '../../hooks/redux'
 
-type StateProps = ReturnType<typeof mapStateToProps>
-type DispatchProps = ReturnType<typeof mapDispatchToProps>
-type OwnProps = {}
-type Props = OwnProps & StateProps & DispatchProps
+type Props = {}
 
-const NavBar: FunctionComponent<Props> = ({ userName }) => {
+const NavBar: FunctionComponent<Props> = () => {
+  const dispatch = useThunkDispatch()
+  const userName = useSelector(state => state.user.profile.userName)
+  const onLogout = () => dispatch(actions.logout())
   return (
     <Container>
+      <SideBar />
       <StyledLink to="/">home</StyledLink>
-      <StyledLink to="/signup">Signup</StyledLink>
-      <StyledLink to="/login">Login</StyledLink>
-      <StyledLink to="/templates">Template</StyledLink>
-      <StyledLink to="/templates/create">Create Template</StyledLink>
-      <div>Welcome, {userName}</div>
+      <StyledLink to="/templates">Templates</StyledLink>
+      <StyledLink to="/templates/create">Create template</StyledLink>
+      <StyledLink to="/content">Content</StyledLink>
+      <StyledButton onClick={onLogout}>Log out</StyledButton>
     </Container>
   )
 }
 
-const mapStateToProps = (state: MainState) => {
-  return {
-    userName: state.user.profile.userName,
-  }
-}
-
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, Action>) => {
-  return {
-    onSetGreeting: (greeting: string) => dispatch(actions.setGreetingSuccess(greeting)),
-    onResetAppState: () => dispatch(actions.resetAppState()),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+export default NavBar

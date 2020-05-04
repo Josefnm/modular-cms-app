@@ -1,7 +1,6 @@
 import { ThunkDispatch } from 'redux-thunk'
-import { Action, Dispatch } from 'redux'
+import { Action } from 'redux'
 import { MainState } from '../reducers'
-import 'firebase/auth'
 import { client } from '../../network/axios-client'
 import * as ActionTypes from './ActionTypes'
 import { TemplateModel } from '../reducers/template.reducers'
@@ -20,9 +19,16 @@ const getOwnTemplatesFail = (error: string) => {
   }
 }
 
-export const getOwnTemplates = () => async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
+export const getTemplates = () => async (
+  dispatch: ThunkDispatch<MainState, {}, Action>,
+  getState: () => MainState
+) => {
+  const {
+    project: { selectedProject },
+  } = getState()
   try {
-    const response = await client.get('/template/user')
+    const response = await client.get(`template/projectId/${selectedProject}`)
+    console.log('templates', response.data)
     const templates = response.data
     dispatch(getOwnTemplatesSuccess(templates))
   } catch (error) {
@@ -30,27 +36,39 @@ export const getOwnTemplates = () => async (dispatch: ThunkDispatch<MainState, {
   }
 }
 
-export const createTemplate = (template: TemplateModel) => async (
-  dispatch: ThunkDispatch<MainState, {}, Action>
+export const createTemplate = (templateForm: TemplateModel) => async (
+  dispatch: ThunkDispatch<MainState, {}, Action>,
+  getState: () => MainState
 ) => {
+  const {
+    user: { profile },
+    project: { selectedProject },
+  } = getState()
+
+  const template: TemplateModel = {
+    ...templateForm,
+    ownerId: profile.id,
+    projectId: selectedProject,
+  }
+
   try {
     const response = await client.post(`/template`, template)
     console.log(response)
-    dispatch(createEventSuccess(response.data))
+    dispatch(createTemplateSuccess(response.data))
   } catch (error) {
     console.log(error)
-    dispatch(createEventFail(error.message))
+    dispatch(createTemplateFail(error.message))
   }
 }
 
-const createEventSuccess = (data: TemplateModel) => {
+const createTemplateSuccess = (data: TemplateModel) => {
   return {
     type: ActionTypes.CREATE_TEMPLATE_SUCCESS,
-    action: data,
+    data,
   }
 }
 
-const createEventFail = (action: Action) => {
+const createTemplateFail = (action: Action) => {
   return {
     type: ActionTypes.CREATE_TEMPLATE_FAIL,
     error: action,
