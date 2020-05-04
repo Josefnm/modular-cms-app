@@ -3,17 +3,20 @@ import 'firebase/auth'
 import 'firebase/storage'
 import imageCompression from 'browser-image-compression'
 
-export const initializeFirebaseAuth = () => {
-  firebase.initializeApp({
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: 'josefs-cms.firebaseapp.com',
-    databaseURL: 'https://josefs-cms.firebaseio.com',
-    projectId: 'josefs-cms',
-    storageBucket: 'josefs-cms.appspot.com',
-    messagingSenderId: '329786074187',
-    appId: '1:329786074187:web:2b29f1441f50e2eee019ce',
-  })
-  firebase.auth()
+export const initializeFirebaseAuth = async () => {
+  if (firebase.apps.length === 0) {
+    await firebase.initializeApp({
+      apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+      authDomain: 'josefs-cms.firebaseapp.com',
+      databaseURL: 'https://josefs-cms.firebaseio.com',
+      projectId: 'josefs-cms',
+      storageBucket: 'josefs-cms.appspot.com',
+      messagingSenderId: '329786074187',
+      appId: '1:329786074187:web:2b29f1441f50e2eee019ce',
+    })
+
+    await firebase.auth()
+  }
 }
 const options = {
   maxSizeMB: 2,

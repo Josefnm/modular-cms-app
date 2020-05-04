@@ -15,6 +15,9 @@ export const SIGNUP_FAIL = 'signup_fail'
 export const LOGIN_SUCCESS = 'login_success'
 export const LOGIN_FAIL = 'login_fail'
 
+export const GET_PROFILE_SUCCESS = 'login_success'
+export const GET_PROFILE_FAIL = 'login_fail'
+
 export const LOGOUT_SUCCESS = 'logout_success'
 export const LOGOUT_FAIL = 'logout_fail'
 
@@ -28,3 +31,14 @@ export const GET_OWN_TEMPLATES_FAIL = 'GET_OWN_TEMPLATES_FAIL'
 
 export const CREATE_TEMPLATE_SUCCESS = 'CREATE_TEMPLATE_SUCCESS'
 export const CREATE_TEMPLATE_FAIL = 'CREATE_TEMPLATE_FAIL'
+
+// Projects
+
+export const GET_OWN_PROJECTS_SUCCESS = 'GET_OWN_PROJECTS_SUCCESS'
+export const GET_OWN_PROJECTS_FAIL = 'GET_OWN_PROJECTS_FAIL'
+
+export const CREATE_PROJECT_SUCCESS = 'CREATE_PROJECT_SUCCESS'
+export const CREATE_PROJECT_FAIL = 'CREATE_PROJECT_FAIL'
+
+export const SELECT_PROJECT_SUCCESS = 'SELECT_PROJECT_SUCCESS'
+export const SELECT_PROJECT_FAIL = 'SELECT_PROJECT_FAIL'

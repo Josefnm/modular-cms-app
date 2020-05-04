@@ -1,20 +1,23 @@
 import { PURGE } from 'redux-persist'
 import { AxiosError } from 'axios'
 import * as ActionTypes from '../actions/ActionTypes'
+import { DataType } from '../../models/dataType'
 
 export type TemplateModel = {
-  id: string
-  ownerId: string
-  created: number
-  updated: number
+  id?: string
+  ownerId?: string
+  projectId: string
+  created?: number
+  updated?: number
   name: string
-  description: string
-  isPublic: boolean
+  description?: string
+  isPublic?: boolean
   templateFields: TemplateFieldModel[]
 }
+
 export type TemplateFieldModel = {
   name: string
-  dataType: string
+  dataType: DataType
 }
 
 export type TemplateState = {

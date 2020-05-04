@@ -1,14 +1,14 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import { MainState } from '../reducers'
-import { SignupForm } from '../../screens/SignupScreen'
 import 'firebase/auth'
 import { client, clientNoAuth } from '../../network/axios-client'
 import * as ActionTypes from './ActionTypes'
 import { UserModel } from '../reducers/user.reducers'
 import * as actions from '.'
-import { LoginForm } from '../../screens/LoginScreen'
+import { SignupForm } from '../../screens/AuthScreen/Signup'
+import { LoginForm } from '../../screens/AuthScreen/Login'
 
 const signupSuccess = (user: UserModel) => {
   return {
@@ -38,32 +38,42 @@ const loginFail = (error: string) => {
   }
 }
 
+const getProfileSuccess = (user: UserModel) => {
+  return {
+    type: ActionTypes.GET_PROFILE_SUCCESS,
+    user,
+  }
+}
+
+const getProfileFail = (error: string) => {
+  return {
+    type: ActionTypes.GET_PROFILE_FAIL,
+    error,
+  }
+}
+
 export const signup = (form: SignupForm) => {
   return async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
     try {
-      const response = await clientNoAuth.post('/users/signup', form)
+      const response = await clientNoAuth.post('/user/signup', form)
       const user = response.data
       await firebaseLogin(form)
       dispatch(signupSuccess(user))
     } catch (error) {
       dispatch(signupFail(error.message))
-      throw new Error(`Cant sign up: ${error.message}`)
     }
   }
 }
 
-export const login = (form: LoginForm) => {
+export const getProfile = () => {
   return async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
     try {
-      await firebaseLogin(form)
-
-      const response = await client.get('/users/getProfile')
+      const response = await client.get('/user')
       const user = response.data
-
-      dispatch(loginSuccess(user))
+      console.log('user', user)
+      dispatch(getProfileSuccess(user))
     } catch (error) {
-      dispatch(loginFail(error.message))
-      throw new Error(`Cant sign up: ${error.message}`)
+      dispatch(getProfileFail(error.message))
     }
   }
 }
@@ -75,11 +85,19 @@ export const logout = () => {
   }
 }
 
-const firebaseLogin = async (form: LoginForm) => {
-  if (firebase.auth().currentUser) {
-    await firebase.auth().signOut()
+export const firebaseLogin = (form: LoginForm) => {
+  return async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
+    try {
+      if (firebase.auth().currentUser) {
+        await dispatch(actions.logout())
+      }
+      const userCredential = await firebase
+        .auth()
+        .signInWithEmailAndPassword(form.email, form.password)
+      const token = await userCredential.user.getIdToken()
+      client.defaults.headers.authorization = `Bearer ${token}`
+    } catch (error) {
+      dispatch(loginFail(error.message))
+    }
   }
-  const userCredential = await firebase.auth().signInWithEmailAndPassword(form.email, form.password)
-  const token = await userCredential.user.getIdToken()
-  client.defaults.headers.authorization = `Bearer ${token}`
 }
