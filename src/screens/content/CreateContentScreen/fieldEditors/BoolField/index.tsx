@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react'
-import { Field, useFormik, useFormikContext } from 'formik'
-import { Label, StyledErrorMessage } from '../styled'
+import { Field } from 'formik'
+import { StyledErrorMessage } from '../styled'
 import { Heading5 } from '../../../../../styles/text'
-import { Container, RadioContainer, RadioLabel, StyledField } from './styled'
+import { Container, RadioContainer, RadioLabel } from './styled'
 
 type Props = {
   name: string

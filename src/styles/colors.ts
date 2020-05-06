@@ -1,7 +1,8 @@
 export default {
   background: '#F7F9FA',
   blueLight: '#4a90e2',
-  blueDark: '#3072be',
+  blueMedium: '#3072be',
+  blueDark: '#192532',
   greenLight: '#0eb87f',
   greenExtraLight: '#1ACE91',
   greenDark: '#0baa75',

@@ -3,13 +3,12 @@ import { useHistory } from 'react-router-dom'
 import * as actions from '../../store/actions'
 import { Container, StyledButton, StyledLink } from './styled'
 import SideBar from '../SideBar'
-import { useSelector, useThunkDispatch } from '../../hooks/redux'
+import { useThunkDispatch } from '../../hooks/redux'
 
 type Props = {}
 
 const NavBar: FunctionComponent<Props> = () => {
   const dispatch = useThunkDispatch()
-  const userName = useSelector(state => state.user.profile.userName)
   const history = useHistory()
   const onLogout = () => {
     history.push('/')
@@ -29,6 +28,9 @@ const NavBar: FunctionComponent<Props> = () => {
       </StyledLink>
       <StyledLink exact to="/content">
         Content
+      </StyledLink>
+      <StyledLink exact to="/settings">
+        Settings
       </StyledLink>
       <StyledButton onClick={onLogout}>Log out</StyledButton>
     </Container>

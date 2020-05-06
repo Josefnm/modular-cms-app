@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components'
 import { ButtonBase } from '../buttons'
+import colors from '../../styles/colors'
 
 const SlideIn = keyframes`
   0% { left: -350px; }
@@ -20,8 +21,8 @@ export const Container = styled.div`
 
 const fadeIn = keyframes`
   0% { opacity: 0; }
-
 `
+
 export const Overlay = styled.div`
   animation: ${fadeIn};
   animation-duration: 0.5s;
@@ -47,11 +48,16 @@ export const SideArea = styled.div`
 `
 
 export const NavBarButton = styled(ButtonBase)`
+  padding: 0 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   min-width: 200px;
   text-decoration: none;
   color: white;
   box-shadow: inset -1px 0 2px 0 rgba(0, 0, 0, 0.4), inset -2px 0 5px 0 rgba(0, 0, 0, 0.35);
-  background-color: #192532;
+  background-color: ${colors.blueDark};
   border-width: 0;
   height: 100%;
 `

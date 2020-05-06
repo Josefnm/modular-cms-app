@@ -11,12 +11,18 @@ export const TableCell = styled.td`
   border-top: ${colors.grey4} 1px solid;
 `
 
-export const HeaderTableCell = styled(TableCell)`
+type HeaderProps = {
+  isEmpty: boolean
+}
+
+export const HeaderTableCell = styled(TableCell)<HeaderProps>`
   &:last-child {
     border-top-right-radius: 5px;
+    border-bottom-right-radius: ${({ isEmpty }) => (isEmpty ? 5 : 0)}px;
   }
   &:first-child {
     border-top-left-radius: 5px;
+    border-bottom-left-radius: ${({ isEmpty }) => (isEmpty ? 5 : 0)}px;
   }
 `
 
@@ -34,11 +40,11 @@ export const StyledTable = styled.table`
   border-top-width: 0;
 `
 
-type Props = {
+type RowProps = {
   clickable?: boolean
 }
 
-export const TableRow = styled.tr<Props>`
+export const TableRow = styled.tr<RowProps>`
   :hover {
     ${({ clickable }) => clickable && `background-color: ${colors.grey7};`}
   }

@@ -1,4 +1,3 @@
-import moment from 'moment'
 import { ContentForm } from './index'
 import { ContentFieldModel } from '../../../store/reducers/content.reducers'
 import { TemplateFieldModel } from '../../../store/reducers/template.reducers'
@@ -8,8 +7,12 @@ export const generateContentFields = (
   form: ContentForm,
   templateFields: TemplateFieldModel[]
 ): ContentFieldModel[] => {
-  return templateFields.map(tf => {
-    return { data: form[tf.name], name: tf.name, type: tf.dataType }
+  return templateFields.map(templateField => {
+    return {
+      data: form[templateField.name],
+      name: templateField.name,
+      type: templateField.dataType,
+    }
   })
 }
 

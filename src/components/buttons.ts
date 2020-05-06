@@ -49,11 +49,11 @@ export const RedSquareButton = styled(SquareButton)<props>`
 `
 
 export const BlueSquareButton = styled(SquareButton)<props>`
-  border-color: ${colors.blueDark};
+  border-color: ${colors.blueMedium};
   background-color: ${colors.blueLight};
   color: ${colors.grey7};
   :hover {
-    background-color: ${colors.blueDark};
+    background-color: ${colors.blueMedium};
   }
 `
 
@@ -61,7 +61,7 @@ export const LinkButton = styled(ButtonBase)<props>`
   text-decoration: underline;
   border-width: 0;
   background-color: transparent;
-  color: ${colors.blueDark};
+  color: ${colors.blueMedium};
   :hover {
     color: ${colors.grey1};
   }

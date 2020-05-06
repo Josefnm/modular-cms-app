@@ -1,13 +1,14 @@
 import React, { FunctionComponent, useState } from 'react'
 import { CenterContainer } from './styled'
-import { Heading1, Heading2 } from '../../styles/text'
+import {  Heading2 } from '../../styles/text'
 import { useSelector } from '../../hooks/redux'
 import { BlueSquareButton } from '../../components/buttons'
 import CreateProject from '../../components/CreateProject'
+import { SubHeader } from '../../components/common'
 
 type Props = {}
 
-const HomeScreen: FunctionComponent<Props> = () => {
+const SettingsScreen: FunctionComponent<Props> = () => {
   const { userName } = useSelector(state => state.user.profile)
   const { projects } = useSelector(state => state.project)
 
@@ -15,7 +16,7 @@ const HomeScreen: FunctionComponent<Props> = () => {
 
   return (
     <CenterContainer>
-      <Heading1>Welcome, {userName}</Heading1>
+      <SubHeader>Welcome, {userName}</SubHeader>
       {projects.length === 0 && (
         <>
           <Heading2 marginVertical={20}>Start by creating a project</Heading2>
@@ -29,4 +30,4 @@ const HomeScreen: FunctionComponent<Props> = () => {
   )
 }
 
-export default HomeScreen
+export default SettingsScreen
