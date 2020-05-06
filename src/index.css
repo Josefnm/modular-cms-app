@@ -36,3 +36,12 @@ a {
   color: #2a3039;
   text-decoration: none;
 }
+
+.ck-editor__editable_inline {
+  min-height: 150px;
+  max-height: 500px;
+  cursor: text;
+}
+.ck.ck-editor__editable.ck-editor__editable_inline.ck-blurred{
+  border: #c3cfd5 1px solid ;
+}

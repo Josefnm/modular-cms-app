@@ -28,7 +28,6 @@ export const getTemplates = () => async (
   } = getState()
   try {
     const response = await client.get(`template/projectId/${selectedProject}`)
-    console.log('templates', response.data)
     const templates = response.data
     dispatch(getOwnTemplatesSuccess(templates))
   } catch (error) {

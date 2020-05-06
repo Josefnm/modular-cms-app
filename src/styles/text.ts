@@ -13,11 +13,11 @@ type MarginProps = {
 
 const marginProps = css<MarginProps>`
    margin: 0;
-  ${({ margin }) => margin && `margin: ${margin}px`}
-  ${({ marginTop }) => marginTop && `margin-top: ${marginTop}px`}
-  ${({ marginLeft }) => marginLeft && `margin-left: ${marginLeft}px`}
-  ${({ marginRight }) => marginRight && `margin-right: ${marginRight}px`}
-  ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}px`}
+  ${({ margin }) => margin && `margin: ${margin}px;`}
+  ${({ marginTop }) => marginTop && `margin-top: ${marginTop}px;`}
+  ${({ marginLeft }) => marginLeft && `margin-left: ${marginLeft}px;`}
+  ${({ marginRight }) => marginRight && `margin-right: ${marginRight}px;`}
+  ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}px;`}
   ${({ marginHorizontal }) =>
     marginHorizontal && `margin-left: ${marginHorizontal}px; margin-right:${marginHorizontal}px;`}
   ${({ marginVertical }) =>

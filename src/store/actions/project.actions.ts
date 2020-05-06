@@ -101,6 +101,7 @@ export const selectProject = (projectId: string) => async (
     if (!projectFound) throw new Error()
     dispatch(selectProjectSuccess(projectFound.id))
     dispatch(actions.getTemplates())
+    dispatch(actions.getContent())
   } catch (error) {
     console.log('select project error', error.message)
     dispatch(selectProjectFail('Group not found in the state'))

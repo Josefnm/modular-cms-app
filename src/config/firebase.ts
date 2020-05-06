@@ -2,6 +2,7 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/storage'
 import imageCompression from 'browser-image-compression'
+import { v4 as uuidv4 } from 'uuid'
 
 export const initializeFirebaseAuth = async () => {
   if (firebase.apps.length === 0) {
@@ -27,7 +28,7 @@ const options = {
 export const uploadImage = async (ref: string, Image: File | Blob) => {
   try {
     const compressedImage = await imageCompression(Image, options)
-    const storageRef = firebase.storage().ref(ref)
+    const storageRef = firebase.storage().ref(`${ref}/${uuidv4()}`)
     await storageRef.put(compressedImage)
     return await storageRef.getDownloadURL()
   } catch (error) {

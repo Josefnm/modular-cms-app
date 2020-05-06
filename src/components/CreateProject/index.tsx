@@ -8,7 +8,7 @@ import FormField from '../FormField'
 import { GreenSquareButton, SquareButton } from '../buttons'
 import ModalHeader from '../ModalHeader'
 import Modal from '../Modal'
-import { RowContainer } from '../containers'
+import { RowContainer } from '../common'
 import * as actions from '../../store/actions'
 import { useThunkDispatch } from '../../hooks/redux'
 

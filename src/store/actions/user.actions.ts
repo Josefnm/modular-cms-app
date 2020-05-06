@@ -57,7 +57,8 @@ export const signup = (form: SignupForm) => {
     try {
       const response = await clientNoAuth.post('/user/signup', form)
       const user = response.data
-      await firebaseLogin(form)
+      console.log('user', user)
+      await dispatch(firebaseLogin(form))
       dispatch(signupSuccess(user))
     } catch (error) {
       dispatch(signupFail(error.message))
@@ -87,7 +88,9 @@ export const logout = () => {
 
 export const firebaseLogin = (form: LoginForm) => {
   return async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
+    console.log('current user', firebase.auth().currentUser)
     try {
+      console.log('current user', firebase.auth().currentUser)
       if (firebase.auth().currentUser) {
         await dispatch(actions.logout())
       }

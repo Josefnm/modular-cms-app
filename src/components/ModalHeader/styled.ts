@@ -6,7 +6,7 @@ export const Header = styled.div`
   border-top-left-radius: 3px;
   width: 100%;
   height: 80px;
-  background-color: ${colors.grey6};
+  background-color: ${colors.grey7};
   border-bottom: ${colors.grey3} 1px solid;
   display: flex;
   flex-direction: column;

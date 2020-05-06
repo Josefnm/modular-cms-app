@@ -1,4 +1,7 @@
 import * as yup from 'yup'
+import { Schema } from 'yup'
+import { TemplateFieldModel } from '../store/reducers/template.reducers'
+import { DataType } from '../models/dataType'
 
 const email = yup
   .string()
@@ -36,6 +39,51 @@ const fieldName = (name: string[]) => {
     .notOneOf(name, '* Name already in use')
 }
 
+const stringField = yup.string().max(255, 'Too long')
+
+const textField = yup.string().max(10000, 'Too long')
+const imageField = yup.object()
+
+const dateField = yup.date().nullable(true)
+
+const numberField = yup
+  .number()
+  .typeError('Must be a number')
+  .max(9223372036854775807, 'Too large, maximum value is 9223372036854775807')
+  .min(-9223372036854775808, 'Too small, minimum value is -9223372036854775808')
+
+const booleanField = yup
+  .boolean()
+  .typeError('* Field required')
+  .required('* Field required')
+
+export const generateValidators = (templateFields: TemplateFieldModel[]) => {
+  return templateFields.reduce((object, tField) => {
+    return { ...object, [tField.name]: chooseValidator(tField.dataType) }
+  }, {} as { [name: string]: Schema<any> })
+}
+
+const chooseValidator = (dataType: string) => {
+  switch (dataType) {
+    case DataType.STRING:
+      return stringField
+    case DataType.TEXT:
+      return textField
+    case DataType.NUMBER:
+      return numberField
+    case DataType.DATE:
+      return dateField
+    case DataType.IMAGE:
+      return imageField
+    case DataType.BOOL:
+      return booleanField
+    case DataType.MODULE:
+      return stringField
+    default:
+      return null
+  }
+}
+
 export default {
   email,
   password,
@@ -44,4 +92,7 @@ export default {
   fieldName,
   description,
   fieldArray,
+  stringField,
+  numberField,
+  booleanField,
 }

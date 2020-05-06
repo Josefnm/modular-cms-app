@@ -1,0 +1,16 @@
+export const ckToolbar = [
+  'heading',
+  '|',
+  'bold',
+  'italic',
+  'blockQuote',
+  'link',
+  'numberedList',
+  'bulletedList',
+  '|',
+  'Outdent',
+  'Indent',
+  '|',
+  'undo',
+  'redo',
+]
