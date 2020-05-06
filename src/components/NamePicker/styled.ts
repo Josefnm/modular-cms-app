@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Form } from 'formik'
 import colors from '../../styles/colors'
-import { RowContainer } from '../containers'
+import { RowContainer } from '../common'
 
 export const Container = styled.div`
   width: 670px;

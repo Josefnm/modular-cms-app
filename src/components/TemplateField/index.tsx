@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useCallback } from 'react'
 import { FieldArrayRenderProps } from 'formik'
 import {
   Container,
@@ -10,7 +10,7 @@ import {
 } from './styled'
 import colors from '../../styles/colors'
 import { Heading3 } from '../../styles/text'
-import { DataType, fieldTypes } from '../../models/dataType'
+import { fieldTypes } from '../../models/dataType'
 import { TemplateFieldModel } from '../../store/reducers/template.reducers'
 
 type Props = {
@@ -25,18 +25,22 @@ const iconStyle = {
 }
 
 const TemplateField: FunctionComponent<Props> = ({ templateField, arrayHelpers, index }) => {
-  const fields = fieldTypes[DataType[templateField.dataType]]
   const deleteThis = () => arrayHelpers.remove(index)
+
+  const fieldType = useCallback(() => {
+    return fieldTypes.find(f => f.type === templateField.dataType)
+  }, [templateField.dataType])
+
   return (
     <Container>
       <EditButton>
         <IconContainer>
-          {React.createElement(fields.iconType, {
+          {React.createElement(fieldType().iconType, {
             ...iconStyle,
           })}
         </IconContainer>
         <Heading3 marginHorizontal={10}>{templateField.name}</Heading3>
-        <StyledHeading4>{fields.headerText}</StyledHeading4>
+        <StyledHeading4>{fieldType().headerText}</StyledHeading4>
       </EditButton>
       <DeleteButton onClick={deleteThis}>
         <StyledMdClose />

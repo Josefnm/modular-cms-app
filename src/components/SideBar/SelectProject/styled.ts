@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const ProjectButton = styled(ButtonBase)<Props>`
-  background-color: ${({ isSelected }) => (isSelected ? colors.grey5 : 'transparent')};
+  background-color: ${({ isSelected }) => (isSelected ? colors.grey6 : 'transparent')};
   border-width: 0;
   display: flex;
   justify-content: space-between;

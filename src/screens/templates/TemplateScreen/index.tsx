@@ -1,14 +1,26 @@
-import React, { FunctionComponent, useCallback, useEffect } from 'react'
+import React, { FunctionComponent, useCallback, useEffect, useMemo } from 'react'
+import { BsPuzzle } from 'react-icons/bs'
+import { useHistory } from 'react-router-dom'
 import * as actions from '../../../store/actions'
-import { Container, HeaderTableCell, StyledTable, TableCell, TemplateTableHeader } from './styled'
+import { Container, HeaderPadding, TableContainer } from './styled'
 import { useSelector, useThunkDispatch } from '../../../hooks/redux'
+import { formatTimestamp } from '../../../utils/timeUtils'
+import colors from '../../../styles/colors'
+import { Heading2 } from '../../../styles/text'
+import { BlueSquareButton } from '../../../components/buttons'
+import { SubHeader } from '../../../components/common'
+import Table from '../../../components/Table'
 
 type Props = {}
 
 const TemplateScreen: FunctionComponent<Props> = () => {
-  const userTemplates = useSelector(state => state.template.userTemplates)
+  const projectTemplates = useSelector(state => state.template.projectTemplates)
   const userId = useSelector(state => state.user.profile.id)
   const dispatch = useThunkDispatch()
+  const history = useHistory()
+
+  const navigateToCreateTemplate = () => history.push('/templates/create')
+
   useEffect(() => {
     dispatch(actions.getTemplates())
   }, [dispatch])
@@ -20,32 +32,38 @@ const TemplateScreen: FunctionComponent<Props> = () => {
     [userId]
   )
 
-  const templates = useCallback(() => {
-    return userTemplates.map((template, index) => (
-      <tr key={template.id}>
-        <TableCell>{template.name}</TableCell>
-        <TableCell>{template.description}</TableCell>
-        <TableCell>{template.templateFields.length}</TableCell>
-        <TableCell>{template.created}</TableCell>
-        <TableCell>{ownerName(template.ownerId)}</TableCell>
-      </tr>
-    ))
-  }, [ownerName, userTemplates])
+  const rowValues = useMemo(() => {
+    return projectTemplates.map((template, index) => {
+      return {
+        values: [
+          template.name,
+          template.description,
+          template.templateFields.length.toString(),
+          formatTimestamp(template.created),
+          ownerName(template.ownerId),
+        ],
+      }
+    })
+  }, [ownerName, projectTemplates])
+
+  const headerValues = ['Name', 'Description', 'Fields', 'Created', 'By']
 
   return (
     <Container>
-      <StyledTable>
-        <TemplateTableHeader>
-          <tr>
-            <HeaderTableCell>Name</HeaderTableCell>
-            <HeaderTableCell>Description</HeaderTableCell>
-            <HeaderTableCell>Fields</HeaderTableCell>
-            <HeaderTableCell>Created</HeaderTableCell>
-            <HeaderTableCell>By</HeaderTableCell>
-          </tr>
-        </TemplateTableHeader>
-        <tbody>{templates()}</tbody>
-      </StyledTable>
+      <SubHeader>
+        <HeaderPadding>
+          <BsPuzzle size={40} style={{ color: colors.greenLight }} />
+          <Heading2 marginHorizontal={10}>Templates</Heading2>
+        </HeaderPadding>
+        <HeaderPadding>
+          <BlueSquareButton type="button" onClick={navigateToCreateTemplate}>
+            Add Template
+          </BlueSquareButton>
+        </HeaderPadding>
+      </SubHeader>
+      <TableContainer>
+        <Table headerValues={headerValues} bodyValues={rowValues} />
+      </TableContainer>
     </Container>
   )
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Form } from 'formik'
-import { ColumnContainer, RowContainer } from '../../components/containers'
+import { ColumnContainer, RowContainer } from '../../components/common'
 import { BlueSquareButton } from '../../components/buttons'
 import colors from '../../styles/colors'
 
@@ -23,7 +23,7 @@ export const LinkButtonContainer = styled(RowContainer)`
 `
 
 export const Container = styled(ColumnContainer)`
-  background: ${colors.grey6};
+  background: ${colors.grey7};
   align-items: center;
   flex: 1;
 `

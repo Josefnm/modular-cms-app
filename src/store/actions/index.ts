@@ -1,5 +1,5 @@
-export { setGreetingSuccess } from './hello.actions'
 export { resetAppState } from './state.actions'
 export { signup, getProfile, firebaseLogin, logout } from './user.actions'
 export { getTemplates, createTemplate } from './template.actions'
+export { getContent, createContent } from './content.actions'
 export { getProjects, createProject, selectProject } from './project.actions'

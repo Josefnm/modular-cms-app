@@ -4,13 +4,13 @@ import { Formik } from 'formik'
 import validation from '../../utils/validation'
 import FormField from '../FormField'
 import { GreenSquareButton, SquareButton } from '../buttons'
-import { DataType } from '../../models/dataType'
 import { ButtonContainer, StyledForm } from './styled'
+import { FieldType } from '../../models/dataType'
 
 type Props = {
   usedNames: string[]
   onSubmit: (values: FieldTypeForm) => void
-  setDataType: Dispatch<SetStateAction<DataType>>
+  setDataType: Dispatch<SetStateAction<FieldType>>
 }
 
 type FieldTypeForm = {

@@ -1,68 +1,67 @@
 import { BsPuzzle } from 'react-icons/bs'
 import { IconType } from 'react-icons'
 
-export enum DataType {
-  FORMATTED_TEXT,
-  STRING,
-  NUMBER,
-  DATE,
-  LOCATION,
-  MEDIA,
-  BOOL,
-  MODULE,
-}
-
-export type FieldTypes = {
-  [dataType in DataType]: FieldType
-}
 export type FieldType = {
   iconType: IconType
   headerText: string
   bodyText: string
+  type: string
 }
 
-export const fieldTypes: FieldTypes = {
-  [DataType.FORMATTED_TEXT]: {
+export enum DataType {
+  TEXT = 'TextField',
+  STRING = 'StringField',
+  NUMBER = 'NumberField',
+  DATE = 'DateField',
+  IMAGE = 'ImageField',
+  BOOL = 'BooleanField',
+  MODULE = 'ModuleField',
+}
+
+export const fieldTypes: FieldType[] = [
+  {
     iconType: BsPuzzle,
     headerText: 'Rich text',
     bodyText: 'Text formatting with references and media',
+    type: DataType.TEXT,
   },
-  [DataType.STRING]: {
+  {
     iconType: BsPuzzle,
     headerText: 'Text',
     bodyText: 'Titles, names, paragraphs, list of names',
+    type: DataType.STRING,
   },
-  [DataType.NUMBER]: {
+  {
     iconType: BsPuzzle,
     headerText: 'Number',
     bodyText: 'ID, order number, rating, quantity',
+    type: DataType.NUMBER,
   },
-  [DataType.DATE]: {
+  {
     iconType: BsPuzzle,
     headerText: 'Date and time',
     bodyText: 'Event dates',
+    type: DataType.DATE,
   },
-  [DataType.LOCATION]: {
+  {
     iconType: BsPuzzle,
-    headerText: 'Location',
-    bodyText: 'Coordinates: latitude and longitude',
+    headerText: 'Image',
+    bodyText: 'Jpg, gif, png',
+    type: DataType.IMAGE,
   },
-  [DataType.MEDIA]: {
-    iconType: BsPuzzle,
-    headerText: 'Media',
-    bodyText: 'Images, videos, PDFs and other files',
-  },
-  [DataType.BOOL]: {
+  {
     iconType: BsPuzzle,
     headerText: 'Boolean',
     bodyText: 'Yes or no, 1 or 0, true or false',
+    type: DataType.BOOL,
   },
-  [DataType.MODULE]: {
+  {
     iconType: BsPuzzle,
     headerText: 'Reference',
     bodyText: 'For example, a blog post can reference its author(s)',
+    type: DataType.MODULE,
   },
-}
+]
 
 /* {
     iconType: BsPuzzle,

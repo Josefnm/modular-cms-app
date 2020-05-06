@@ -13,7 +13,7 @@ type Props = {
   onClick: (string) => void
 }
 
-const FieldType: FunctionComponent<Props> = ({ iconType, headerText, bodyText, onClick }) => {
+const FieldTypeCard: FunctionComponent<Props> = ({ iconType, headerText, bodyText, onClick }) => {
   return (
     <FieldTypeButton onClick={onClick}>
       <IconContainer>{React.createElement(iconType, { ...iconStyle })}</IconContainer>
@@ -23,4 +23,4 @@ const FieldType: FunctionComponent<Props> = ({ iconType, headerText, bodyText, o
   )
 }
 
-export default FieldType
+export default FieldTypeCard

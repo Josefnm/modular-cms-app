@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom'
 import { MainState } from '../../../store/reducers'
 import * as actions from '../../../store/actions'
 import { TemplateFieldModel, TemplateModel } from '../../../store/reducers/template.reducers'
-import { Header, HeaderPadding, StyledErrorMessage, StyledForm } from './styled'
+import { HeaderPadding, StyledErrorMessage, StyledForm } from './styled'
 import {
   BlueSquareButton,
   GreenSquareButton,
@@ -23,6 +23,7 @@ import validation from '../../../utils/validation'
 import TemplateField from '../../../components/TemplateField'
 import NamePicker, { TitleForm } from '../../../components/NamePicker'
 import { useThunkDispatch } from '../../../hooks/redux'
+import { SubHeader } from '../../../components/common'
 
 export type TemplateForm = {
   templateFields: TemplateFieldModel[]
@@ -34,7 +35,7 @@ const CreateTemplateScreen: FunctionComponent<Props> = () => {
   const history = useHistory()
   const dispatch = useThunkDispatch()
 
-  const userTemplates = useSelector((state: MainState) => state.template.userTemplates)
+  const projectTemplates = useSelector((state: MainState) => state.template.projectTemplates)
 
   const [fieldPickerOpen, setFieldPickerOpen] = useState(false)
   const [createTemplateOpen, setCreateTemplateOpen] = useState(true)
@@ -43,18 +44,20 @@ const CreateTemplateScreen: FunctionComponent<Props> = () => {
     description: '',
   })
 
-  const onSubmit = (form: TemplateForm) => {
+  const onSubmit = async (form: TemplateForm) => {
     const template: TemplateModel = {
       projectId: 'placeholder',
       ...templateTitle,
       ...form,
     }
-    dispatch(actions.createTemplate(template))
+    await dispatch(actions.createTemplate(template))
+    navigateToTemplates()
   }
+  const navigateToTemplates = () => history.push('/templates')
 
   const usedTemplateNames = useCallback(() => {
-    return userTemplates.map(ut => ut.name)
-  }, [userTemplates])
+    return projectTemplates.map(ut => ut.name)
+  }, [projectTemplates])
 
   const templateFields = (values: TemplateFieldModel[], arrayHelpers: FieldArrayRenderProps) => {
     return values.map((templateField, index) => (
@@ -82,7 +85,7 @@ const CreateTemplateScreen: FunctionComponent<Props> = () => {
           render={arrayHelpers => (
             <>
               <StyledForm>
-                <Header>
+                <SubHeader>
                   <HeaderPadding>
                     <BsPuzzle size={40} style={{ color: colors.greenLight }} />
                     <Heading2 marginHorizontal={10}>{templateTitle.name || 'Untitled'}</Heading2>
@@ -99,7 +102,7 @@ const CreateTemplateScreen: FunctionComponent<Props> = () => {
                     <SquareButton>Cancel</SquareButton>
                     <RedSquareButton margin="0 16px">Delete</RedSquareButton>
                   </HeaderPadding>
-                </Header>
+                </SubHeader>
 
                 <div style={{ paddingTop: '30px' }}>
                   {templateFields(values.templateFields, arrayHelpers)}
@@ -116,7 +119,7 @@ const CreateTemplateScreen: FunctionComponent<Props> = () => {
               <Modal
                 isOpen={createTemplateOpen}
                 setIsOpen={setCreateTemplateOpen}
-                onClose={() => history.push('/templates')}
+                onClose={navigateToTemplates}
               >
                 <NamePicker
                   setModalOpen={setCreateTemplateOpen}

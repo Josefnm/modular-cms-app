@@ -1,11 +1,12 @@
-import React, { FunctionComponent, useCallback, useState } from 'react'
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react'
 import { Container, NavBarButton, Overlay, RowContainer, SideArea } from './styled'
 import { Heading3, Heading4 } from '../../styles/text'
 import { LinkButton } from '../buttons'
 import { getSelectedProject } from '../../store/reducers/project.reducers'
 import CreateProject from '../CreateProject'
 import SelectProject from './SelectProject'
-import { useSelector } from '../../hooks/redux'
+import { useSelector, useThunkDispatch } from '../../hooks/redux'
+import * as actions from '../../store/actions'
 
 type Props = {}
 
@@ -14,6 +15,13 @@ const SideBar: FunctionComponent<Props> = () => {
   const projects = useSelector(state => state.project.projects)
   const [sidebarOpen, setSideBarOpen] = useState(false)
   const [createProjectOpen, setCreateProjectOpen] = useState(false)
+  const dispatch = useThunkDispatch()
+
+  useEffect(() => {
+    if (sidebarOpen) {
+      dispatch(actions.getProjects())
+    }
+  }, [sidebarOpen, dispatch])
 
   const onCreateClick = () => {
     setCreateProjectOpen(true)

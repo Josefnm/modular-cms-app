@@ -15,7 +15,7 @@ export const FieldTypeButton = styled(ButtonBase)`
   flex-direction: column;
   align-items: center;
   :hover {
-    background-color: ${colors.grey6};
+    background-color: ${colors.grey7};
   }
 `
 

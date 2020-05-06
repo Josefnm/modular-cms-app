@@ -22,7 +22,7 @@ export const SquareButton = styled(ButtonBase)<props>`
   padding: 8px 16px;
   ${({ margin }) => margin && `margin: ${margin};`};
   border-color: ${colors.grey4};
-  background-color: ${colors.grey5};
+  background-color: ${colors.grey6};
   color: ${colors.grey2};
   font-size: 16px;
   :hover {
@@ -33,7 +33,7 @@ export const SquareButton = styled(ButtonBase)<props>`
 export const GreenSquareButton = styled(SquareButton)<props>`
   border-color: ${colors.greenDark};
   background-color: ${colors.greenLight};
-  color: ${colors.grey6};
+  color: ${colors.grey7};
   :hover {
     background-color: ${colors.greenDark};
   }
@@ -42,7 +42,7 @@ export const GreenSquareButton = styled(SquareButton)<props>`
 export const RedSquareButton = styled(SquareButton)<props>`
   border-color: ${colors.redDark};
   background-color: ${colors.redLight};
-  color: ${colors.grey6};
+  color: ${colors.grey7};
   :hover {
     background-color: ${colors.redDark};
   }
@@ -51,7 +51,7 @@ export const RedSquareButton = styled(SquareButton)<props>`
 export const BlueSquareButton = styled(SquareButton)<props>`
   border-color: ${colors.blueDark};
   background-color: ${colors.blueLight};
-  color: ${colors.grey6};
+  color: ${colors.grey7};
   :hover {
     background-color: ${colors.blueDark};
   }

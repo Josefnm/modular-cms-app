@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react'
+import { useHistory } from 'react-router-dom'
 import * as actions from '../../store/actions'
 import { Container, StyledButton, StyledLink } from './styled'
 import SideBar from '../SideBar'
@@ -9,14 +10,26 @@ type Props = {}
 const NavBar: FunctionComponent<Props> = () => {
   const dispatch = useThunkDispatch()
   const userName = useSelector(state => state.user.profile.userName)
-  const onLogout = () => dispatch(actions.logout())
+  const history = useHistory()
+  const onLogout = () => {
+    history.push('/')
+    dispatch(actions.logout())
+  }
   return (
     <Container>
       <SideBar />
-      <StyledLink to="/">home</StyledLink>
-      <StyledLink to="/templates">Templates</StyledLink>
-      <StyledLink to="/templates/create">Create template</StyledLink>
-      <StyledLink to="/content">Content</StyledLink>
+      <StyledLink exact to="/">
+        home
+      </StyledLink>
+      <StyledLink exact to="/templates">
+        Templates
+      </StyledLink>
+      <StyledLink exact to="/templates/create">
+        Create template
+      </StyledLink>
+      <StyledLink exact to="/content">
+        Content
+      </StyledLink>
       <StyledButton onClick={onLogout}>Log out</StyledButton>
     </Container>
   )

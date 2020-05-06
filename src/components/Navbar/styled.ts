@@ -9,7 +9,7 @@ const activeStyle: CSSProperties = {
   borderBottom: `${textColors.blue} 5px solid`,
 }
 
-export const StyledLink = styled(NavLink).attrs({ activeStyle, exact: true })`
+export const StyledLink = styled(NavLink).attrs({ activeStyle })`
   white-space: nowrap;
   margin: 10px;
   font-size: 25px;

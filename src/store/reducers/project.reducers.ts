@@ -42,8 +42,6 @@ const getOwnProjectsFail = (state: ProjectState, action: any): ProjectState => (
 })
 
 const createProjectSuccess = (state: ProjectState, action: { data: ProjectModel }) => {
-  console.log('actions data', action)
-  console.log('actions data', action.data)
   return {
     ...state,
     error: null,

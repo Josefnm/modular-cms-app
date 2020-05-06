@@ -12,8 +12,8 @@ const AuthScreen: FunctionComponent<Props> = () => {
   const [buttonText, setButtonText] = useState('Sign up')
 
   const selectLogin = () => {
+    setButtonText(loginSelected ? 'Log in' : 'Sign up')
     setLoginSelected(!loginSelected)
-    setButtonText(loginSelected ? 'Sign up' : 'Log in')
   }
 
   return (
