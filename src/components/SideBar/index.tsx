@@ -1,6 +1,7 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react'
+import React, { FunctionComponent, useEffect, useMemo, useState } from 'react'
+import { MdMenu } from 'react-icons/all'
 import { Container, NavBarButton, Overlay, RowContainer, SideArea } from './styled'
-import { Heading3, Heading4 } from '../../styles/text'
+import { Heading2, Heading4 } from '../../styles/text'
 import { LinkButton } from '../buttons'
 import { getSelectedProject } from '../../store/reducers/project.reducers'
 import CreateProject from '../CreateProject'
@@ -12,7 +13,7 @@ type Props = {}
 
 const SideBar: FunctionComponent<Props> = () => {
   const selectedProject = useSelector(state => getSelectedProject(state))
-  const projects = useSelector(state => state.project.projects)
+  const { projects } = useSelector(state => state.project)
   const [sidebarOpen, setSideBarOpen] = useState(false)
   const [createProjectOpen, setCreateProjectOpen] = useState(false)
   const dispatch = useThunkDispatch()
@@ -28,7 +29,7 @@ const SideBar: FunctionComponent<Props> = () => {
     setSideBarOpen(false)
   }
 
-  const mapProjects = useCallback(() => {
+  const mapProjects = useMemo(() => {
     return projects.map(project => {
       const isSelected = project.id === selectedProject.id
       return (
@@ -45,7 +46,8 @@ const SideBar: FunctionComponent<Props> = () => {
   return (
     <>
       <NavBarButton type="button" onClick={() => setSideBarOpen(true)}>
-        <Heading3 white>{selectedProject.name || ''}</Heading3>
+        <Heading2 white>{selectedProject.name || ''}</Heading2>
+        <MdMenu size={30} />
       </NavBarButton>
       {sidebarOpen && (
         <>
@@ -55,7 +57,7 @@ const SideBar: FunctionComponent<Props> = () => {
                 <Heading4>Projects</Heading4>
                 <LinkButton onClick={onCreateClick}>+ Create project</LinkButton>
               </RowContainer>
-              {mapProjects()}
+              {mapProjects}
             </SideArea>
             <Overlay onClick={() => setSideBarOpen(false)} />
           </Container>

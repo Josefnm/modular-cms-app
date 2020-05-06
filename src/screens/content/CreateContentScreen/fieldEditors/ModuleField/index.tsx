@@ -24,7 +24,6 @@ const ModuleField: FunctionComponent<Props> = ({ name }) => {
   const [selectedContent, setSelectedContent] = useState<ContentModelWithName>(undefined)
 
   useEffect(() => {
-    console.log(selectedContent)
     if (selectedContent) {
       setFieldTouched(name)
       setFieldValue(name, selectedContent.id)

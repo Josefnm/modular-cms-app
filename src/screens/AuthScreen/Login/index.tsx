@@ -5,7 +5,7 @@ import validation from '../../../utils/validation'
 import * as actions from '../../../store/actions'
 import FormField from '../../../components/FormField'
 import { ConfirmButton, StyledForm } from '../styled'
-import { useSelector, useThunkDispatch } from '../../../hooks/redux'
+import { useThunkDispatch } from '../../../hooks/redux'
 
 export type LoginForm = {
   email: string
@@ -15,7 +15,6 @@ export type LoginForm = {
 type Props = {}
 
 const Login: FunctionComponent<Props> = () => {
-  const userError = useSelector(state => state.user.error)
   const dispatch = useThunkDispatch()
 
   const onSignupPress = async (form: LoginForm, helpers: FormikHelpers<LoginForm>) => {

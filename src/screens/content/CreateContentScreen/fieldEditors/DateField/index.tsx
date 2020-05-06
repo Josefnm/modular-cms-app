@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import DateTimePicker from 'react-datetime-picker'
 import { useFormikContext } from 'formik'
-import moment from 'moment'
 import { Heading5 } from '../../../../../styles/text'
 import { Label, StyledErrorMessage } from '../styled'
 
@@ -12,8 +11,6 @@ type Props = {
 const DateField: FunctionComponent<Props> = ({ name }) => {
   const { setFieldTouched, setFieldValue, values } = useFormikContext()
   const handleChange = (dateTime: string) => {
-    console.log(dateTime)
-    console.log(moment(dateTime).valueOf())
     setFieldValue(name, dateTime)
   }
 

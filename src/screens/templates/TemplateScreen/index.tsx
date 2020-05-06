@@ -14,7 +14,7 @@ import Table from '../../../components/Table'
 type Props = {}
 
 const TemplateScreen: FunctionComponent<Props> = () => {
-  const projectTemplates = useSelector(state => state.template.projectTemplates)
+  const { projectTemplates } = useSelector(state => state.template)
   const userId = useSelector(state => state.user.profile.id)
   const dispatch = useThunkDispatch()
   const history = useHistory()

@@ -9,6 +9,7 @@ export const Container = styled.div`
   max-height: 500px;
   background: white;
 `
+
 export const TableContainer = styled.div`
   padding: 15px;
   display: flex;

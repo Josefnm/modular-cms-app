@@ -1,4 +1,11 @@
-import React, { Dispatch, FunctionComponent, SetStateAction, useCallback, useState } from 'react'
+import React, {
+  Dispatch,
+  FunctionComponent,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react'
 import { Container, FieldContainer } from './styled'
 import FieldTypeCard from './FieldType'
 import { FieldType, fieldTypes } from '../../models/dataType'
@@ -17,7 +24,7 @@ type Props = {
 }
 
 const FieldPicker: FunctionComponent<Props> = ({ pushField, usedNames, setModalOpen }) => {
-  const fields = useCallback(() => {
+  const fields = useMemo(() => {
     return fieldTypes.map((fieldType, index) => {
       return (
         <FieldTypeCard
@@ -49,7 +56,7 @@ const FieldPicker: FunctionComponent<Props> = ({ pushField, usedNames, setModalO
       <ModalHeader>{headerText}</ModalHeader>
       <FieldContainer>
         {!typeChosen ? (
-          fields()
+          fields
         ) : (
           <FieldForm usedNames={usedNames} onSubmit={onSubmit} setDataType={setTypeChosen} />
         )}

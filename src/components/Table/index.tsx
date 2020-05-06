@@ -7,7 +7,6 @@ type Props = {
 }
 
 const Table: FunctionComponent<Props> = ({ headerValues, bodyValues }) => {
-
   const tableBody = useMemo(() => {
     return bodyValues.map(rowValues => (
       <TableRow
@@ -23,8 +22,13 @@ const Table: FunctionComponent<Props> = ({ headerValues, bodyValues }) => {
   }, [bodyValues])
 
   const tableHead = useMemo(() => {
-    return headerValues.map(value => <HeaderTableCell key={value}>{value}</HeaderTableCell>)
-  }, [headerValues])
+    return headerValues.map(value => (
+      <HeaderTableCell key={value} isEmpty={tableBody.length === 0}>
+        {value}
+      </HeaderTableCell>
+    ))
+  }, [headerValues, tableBody])
+
   return (
     <StyledTable>
       <TemplateTableHeader>
