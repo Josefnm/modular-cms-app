@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom'
 import { MainState } from '../../../store/reducers'
 import * as actions from '../../../store/actions'
 import { TemplateFieldModel, TemplateModel } from '../../../store/reducers/template.reducers'
-import { HeaderPadding, StyledErrorMessage, StyledForm } from './styled'
+import { StyledErrorMessage, StyledForm } from './styled'
 import {
   BlueSquareButton,
   GreenSquareButton,
@@ -23,7 +23,7 @@ import validation from '../../../utils/validation'
 import TemplateField from '../../../components/TemplateField'
 import NamePicker, { TitleForm } from '../../../components/NamePicker'
 import { useThunkDispatch } from '../../../hooks/redux'
-import { SubHeader } from '../../../components/common'
+import { HeaderPadding, SubHeader } from '../../../components/common'
 
 export type TemplateForm = {
   templateFields: TemplateFieldModel[]
@@ -90,7 +90,9 @@ const CreateTemplateScreen: FunctionComponent<Props> = () => {
                     <BsPuzzle size={40} style={{ color: colors.greenLight }} />
                     <Heading2 marginHorizontal={10}>{templateTitle.name || 'Untitled'}</Heading2>
                     <Heading5 marginHorizontal={10}>{templateTitle.description}</Heading5>
-                    <LinkButton onClick={() => setCreateTemplateOpen(true)}>Edit</LinkButton>
+                    <LinkButton onClick={() => setCreateTemplateOpen(true)} type="button">
+                      Edit
+                    </LinkButton>
                   </HeaderPadding>
                   <HeaderPadding>
                     <BlueSquareButton type="button" onClick={() => setFieldPickerOpen(true)}>
@@ -99,8 +101,10 @@ const CreateTemplateScreen: FunctionComponent<Props> = () => {
                     <GreenSquareButton type="submit" margin="0 16px">
                       Save
                     </GreenSquareButton>
-                    <SquareButton>Cancel</SquareButton>
-                    <RedSquareButton margin="0 16px">Delete</RedSquareButton>
+                    <SquareButton type="button">Cancel</SquareButton>
+                    <RedSquareButton margin="0 16px" type="button">
+                      Delete
+                    </RedSquareButton>
                   </HeaderPadding>
                 </SubHeader>
 

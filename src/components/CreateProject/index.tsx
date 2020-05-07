@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import React, { Dispatch, FunctionComponent, SetStateAction, useMemo } from 'react'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { useHistory } from 'react-router-dom'
@@ -10,7 +10,7 @@ import ModalHeader from '../ModalHeader'
 import Modal from '../Modal'
 import { RowContainer } from '../common'
 import * as actions from '../../store/actions'
-import { useThunkDispatch } from '../../hooks/redux'
+import { useSelector, useThunkDispatch } from '../../hooks/redux'
 
 export type ProjectForm = {
   name: string
@@ -25,6 +25,11 @@ type Props = {
 const CreateProject: FunctionComponent<Props> = ({ modalOpen, setModalOpen }) => {
   const dispatch = useThunkDispatch()
   const history = useHistory()
+  const { projects } = useSelector(state => state.project)
+
+  const projectNames = useMemo(() => {
+    return projects.map(project => project.name)
+  }, [projects])
 
   const onSubmit = async (form: ProjectForm) => {
     await dispatch(actions.createProject(form))
@@ -43,7 +48,7 @@ const CreateProject: FunctionComponent<Props> = ({ modalOpen, setModalOpen }) =>
           }}
           onSubmit={onSubmit}
           validationSchema={yup.object().shape<ProjectForm>({
-            name: validation.fieldName([]),
+            name: validation.uniqueName(projectNames),
             description: validation.description,
           })}
         >

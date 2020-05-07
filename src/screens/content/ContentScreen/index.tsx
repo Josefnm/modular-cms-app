@@ -4,12 +4,12 @@ import { useHistory } from 'react-router-dom'
 import {
   ButtonContainer,
   Container,
-  HeaderPadding,
   Menu,
   MenuButton,
-  MenuContainer, TableContainer,
+  MenuContainer,
+  TableContainer,
 } from './styled'
-import { SubHeader } from '../../../components/common'
+import { HeaderPadding, SubHeader } from '../../../components/common'
 import colors from '../../../styles/colors'
 import { Heading2, Heading4 } from '../../../styles/text'
 import { BlueSquareButton } from '../../../components/buttons'
@@ -107,8 +107,7 @@ const ContentScreen: FunctionComponent<Props> = () => {
         </ButtonContainer>
       </SubHeader>
       <TableContainer>
-
-      <Table headerValues={headerValues} bodyValues={rowValues} />
+        <Table headerValues={headerValues} bodyValues={rowValues} />
       </TableContainer>
     </Container>
   )

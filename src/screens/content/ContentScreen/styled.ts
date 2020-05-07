@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { ButtonBase } from '../../../components/buttons'
 import colors from '../../../styles/colors'
+import { HeaderPadding } from '../../../components/common'
 
 export const Container = styled.div`
   display: flex;
@@ -8,19 +9,8 @@ export const Container = styled.div`
   align-items: center;
 `
 
-export const HeaderPadding = styled.div`
-  align-items: center;
-  text-align: center;
-  display: flex;
-  padding: 10px 25px;
-`
-
 export const ButtonContainer = styled(HeaderPadding)`
-  align-items: center;
-  text-align: center;
   flex-direction: column;
-  display: flex;
-  padding: 10px 25px;
 `
 
 export const MenuButton = styled(ButtonBase)`
@@ -56,6 +46,5 @@ export const MenuContainer = styled.div`
 `
 
 export const TableContainer = styled.div`
-
   margin-top: 30px;
 `

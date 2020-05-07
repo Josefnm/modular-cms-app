@@ -20,12 +20,7 @@ const NavBar: FunctionComponent<Props> = () => {
       <StyledLink exact to="/">
         home
       </StyledLink>
-      <StyledLink exact to="/templates">
-        Templates
-      </StyledLink>
-      <StyledLink exact to="/templates/create">
-        Create template
-      </StyledLink>
+      <StyledLink to="/templates">Templates</StyledLink>
       <StyledLink exact to="/content">
         Content
       </StyledLink>
