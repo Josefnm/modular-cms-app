@@ -27,15 +27,15 @@ const userName = yup
   .min(6, 'Too short')
   .max(255, 'Too long')
 
-const description = yup.string().max(255, 'Too long')
+const description = yup.string().max(511, 'Too long')
 
 const fieldArray = yup.array().min(1, 'Add at least one field to the template')
 
-const fieldName = (name: string[]) => {
+const uniqueName = (name: string[]) => {
   return yup
     .string()
     .required('* Field required')
-    .max(255, 'Too long')
+    .max(25, '* Too long')
     .notOneOf(name, '* Name already in use')
 }
 
@@ -89,7 +89,7 @@ export default {
   password,
   confirmPassword,
   userName,
-  fieldName,
+  uniqueName,
   description,
   fieldArray,
   stringField,

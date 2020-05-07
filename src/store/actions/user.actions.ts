@@ -88,7 +88,6 @@ export const logout = () => {
 
 export const firebaseLogin = (form: LoginForm) => {
   return async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
-    console.log('current user', firebase.auth().currentUser)
     try {
       console.log('current user', firebase.auth().currentUser)
       if (firebase.auth().currentUser) {

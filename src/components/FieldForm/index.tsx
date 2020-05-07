@@ -25,7 +25,7 @@ const FieldForm: FunctionComponent<Props> = ({ usedNames, onSubmit, setDataType 
       }}
       onSubmit={onSubmit}
       validationSchema={yup.object().shape({
-        fieldName: validation.fieldName(usedNames),
+        fieldName: validation.uniqueName(usedNames),
       })}
     >
       {({ isValid }) => (

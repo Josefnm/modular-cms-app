@@ -7,13 +7,6 @@ export const Container = styled.div`
   width: 100%;
 `
 
-export const HeaderPadding = styled.div`
-  align-items: center;
-  text-align: center;
-  display: flex;
-  padding: 10px 25px;
-`
-
 
 export const TableContainer = styled.div`
 

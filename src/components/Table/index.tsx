@@ -8,7 +8,7 @@ type Props = {
 
 const Table: FunctionComponent<Props> = ({ headerValues, bodyValues }) => {
   const tableBody = useMemo(() => {
-    return bodyValues.map(rowValues => (
+    return bodyValues.map((rowValues) => (
       <TableRow
         key={rowValues.values[0]}
         onClick={rowValues.onClick}

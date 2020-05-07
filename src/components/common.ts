@@ -34,3 +34,10 @@ export const SubHeader = styled.div`
   background-color: ${colors.grey7};
   border-bottom: ${colors.grey3} 1px solid;
 `
+
+export const HeaderPadding = styled.div`
+  align-items: center;
+  text-align: center;
+  display: flex;
+  padding: 10px 25px;
+`

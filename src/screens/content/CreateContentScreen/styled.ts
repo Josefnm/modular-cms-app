@@ -7,13 +7,6 @@ export const StyledForm = styled(Form)`
   align-items: center;
 `
 
-export const HeaderPadding = styled.div`
-  align-items: center;
-  text-align: center;
-  display: flex;
-  padding: 10px 25px;
-`
-
 export const FieldContainer = styled.div`
   width: 700px;
   display: flex;

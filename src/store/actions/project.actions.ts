@@ -1,12 +1,13 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
-import { AxiosResponse } from 'axios'
 import { MainState } from '../reducers'
 import { client } from '../../network/axios-client'
 import * as ActionTypes from './ActionTypes'
 import { ProjectModel } from '../reducers/project.reducers'
 import * as actions from '.'
 import { ProjectForm } from '../../components/CreateProject'
+import { UserModel } from '../reducers/user.reducers'
+import { UpdateProjectForm } from '../../screens/SettingsScreen'
 
 const getOwnProjectsSuccess = (projects: ProjectModel[]) => {
   return {
@@ -48,11 +49,11 @@ export const createProject = (projectForm: ProjectForm) => async (
       ...projectForm,
       ownerId: profile.id,
     }
-    const response: AxiosResponse<ProjectModel> = await client.post(`/project`, project)
+    const { data } = await client.post<ProjectModel>(`/project`, project)
 
-    console.log('create proj success', response.data)
-    dispatch(createProjectSuccess(response.data))
-    await dispatch(selectProject(response.data.id))
+    console.log('create proj success', data)
+    dispatch(createProjectSuccess(data))
+    await dispatch(selectProject(data.id))
   } catch (error) {
     console.log(error)
     dispatch(createProjectFail(error.message))
@@ -60,7 +61,6 @@ export const createProject = (projectForm: ProjectForm) => async (
 }
 
 const createProjectSuccess = (data: ProjectModel) => {
-  console.log('createProjectSuccess: ', data)
   return {
     type: ActionTypes.CREATE_PROJECT_SUCCESS,
     data,
@@ -70,6 +70,72 @@ const createProjectSuccess = (data: ProjectModel) => {
 const createProjectFail = (action: Action) => {
   return {
     type: ActionTypes.CREATE_PROJECT_FAIL,
+    error: action,
+  }
+}
+
+export const updateProject = (form: UpdateProjectForm) => async (
+  dispatch: ThunkDispatch<MainState, {}, Action>,
+  getState: () => MainState
+) => {
+  try {
+    const submitForm = {
+      id: getState().project.selectedProject,
+      name: form.name,
+      description: form.description,
+      memberIds: form.members.map(member => member.id),
+    }
+    const { data } = await client.post<ProjectModel>(`/project/update`, submitForm)
+
+    dispatch(updateProjectSuccess(data))
+    dispatch(getProjects())
+    dispatch(getMembers(data.id))
+    console.log('update proj success', data)
+  } catch (error) {
+    console.log('update project error:', error.message)
+    dispatch(updateProjectFail(error.message))
+  }
+}
+
+const updateProjectSuccess = (data: ProjectModel) => {
+  return {
+    type: ActionTypes.UPDATE_PROJECT_SUCCESS,
+    data,
+  }
+}
+
+const updateProjectFail = (action: Action) => {
+  return {
+    type: ActionTypes.UPDATE_PROJECT_FAIL,
+    error: action,
+  }
+}
+
+export const deleteProject = (projectId: string) => async (
+  dispatch: ThunkDispatch<MainState, {}, Action>
+) => {
+  try {
+    const response = await client.delete(`/project/${projectId}`)
+
+    dispatch(deleteProjectSuccess())
+    await dispatch(getProjects())
+    dispatch(selectDefaultProject())
+    console.log('delete proj success')
+  } catch (error) {
+    console.log('delete project error:', error.message)
+    dispatch(deleteProjectFail(error.message))
+  }
+}
+
+const deleteProjectSuccess = () => {
+  return {
+    type: ActionTypes.DELETE_PROJECT_SUCCESS,
+  }
+}
+
+const deleteProjectFail = (action: Action) => {
+  return {
+    type: ActionTypes.DELETE_PROJECT_FAIL,
     error: action,
   }
 }
@@ -102,9 +168,37 @@ export const selectProject = (projectId: string) => async (
     dispatch(selectProjectSuccess(projectFound.id))
     dispatch(actions.getTemplates())
     dispatch(actions.getContent())
+    dispatch(actions.getMembers(projectId))
   } catch (error) {
     console.log('select project error', error.message)
     dispatch(selectProjectFail('Group not found in the state'))
+  }
+}
+
+export const getMembers = (projectId: string) => async (
+  dispatch: ThunkDispatch<MainState, {}, Action>
+) => {
+  try {
+    const { data } = await client.get<UserModel[]>(`user/project?projectId=${projectId}`)
+
+    dispatch(getMembersSuccess(data))
+  } catch (error) {
+    console.log('get members error', error)
+    dispatch(getMembersFail(error.message))
+  }
+}
+
+const getMembersSuccess = (members: UserModel[]) => {
+  return {
+    type: ActionTypes.GET_MEMBERS_SUCCESS,
+    members,
+  }
+}
+
+const getMembersFail = (action: Action) => {
+  return {
+    type: ActionTypes.GET_MEMBERS_FAIL,
+    error: action,
   }
 }
 

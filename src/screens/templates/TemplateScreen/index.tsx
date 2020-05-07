@@ -2,13 +2,13 @@ import React, { FunctionComponent, useCallback, useEffect, useMemo } from 'react
 import { BsPuzzle } from 'react-icons/bs'
 import { useHistory } from 'react-router-dom'
 import * as actions from '../../../store/actions'
-import { Container, HeaderPadding, TableContainer } from './styled'
+import { Container, TableContainer } from './styled'
 import { useSelector, useThunkDispatch } from '../../../hooks/redux'
 import { formatTimestamp } from '../../../utils/timeUtils'
 import colors from '../../../styles/colors'
 import { Heading2 } from '../../../styles/text'
 import { BlueSquareButton } from '../../../components/buttons'
-import { SubHeader } from '../../../components/common'
+import { HeaderPadding, SubHeader } from '../../../components/common'
 import Table from '../../../components/Table'
 
 type Props = {}

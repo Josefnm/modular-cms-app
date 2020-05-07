@@ -43,7 +43,7 @@ const NamePicker: FunctionComponent<Props> = ({ usedNames, setModalOpen, setTitl
         }}
         onSubmit={onSubmit}
         validationSchema={yup.object().shape<TitleForm>({
-          name: validation.fieldName(usedNames),
+          name: validation.uniqueName(usedNames),
           description: validation.description,
         })}
       >

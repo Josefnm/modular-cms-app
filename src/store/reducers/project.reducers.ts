@@ -2,6 +2,7 @@ import { PURGE } from 'redux-persist'
 import { AxiosError } from 'axios'
 import * as ActionTypes from '../actions/ActionTypes'
 import { MainState } from './index'
+import { UserModel } from './user.reducers'
 
 export type ProjectModel = {
   id?: string
@@ -13,15 +14,21 @@ export type ProjectModel = {
   description?: string
 }
 
+export type MembersModel = {
+  [id: string]: UserModel
+}
+
 export type ProjectState = {
   projects: ProjectModel[]
   selectedProject: string
+  members: MembersModel
   error: string
 }
 
 const INITIAL_STATE: ProjectState = {
   projects: [],
   selectedProject: '',
+  members: {},
   error: null,
 }
 
@@ -41,6 +48,22 @@ const getOwnProjectsFail = (state: ProjectState, action: any): ProjectState => (
   error: action.error,
 })
 
+const getMembersSuccess = (state: ProjectState, action: { members: UserModel[] }): ProjectState => {
+  const members = action.members.reduce<MembersModel>((obj, member) => {
+    return { ...obj, [member.id]: member }
+  }, {})
+  return {
+    ...state,
+    members,
+    error: null,
+  }
+}
+
+const getMembersFail = (state: ProjectState, action: any): ProjectState => ({
+  ...state,
+  error: action.error,
+})
+
 const createProjectSuccess = (state: ProjectState, action: { data: ProjectModel }) => {
   return {
     ...state,
@@ -50,6 +73,17 @@ const createProjectSuccess = (state: ProjectState, action: { data: ProjectModel 
 }
 
 const createProjectFail = (state: ProjectState, action: { error: AxiosError }) => {
+  return { ...state, error: action.error }
+}
+
+const updateProjectSuccess = (state: ProjectState, action) => {
+  return {
+    ...state,
+    error: null,
+  }
+}
+
+const updateProjectFail = (state: ProjectState, action: { error: AxiosError }) => {
   return { ...state, error: action.error }
 }
 
@@ -95,6 +129,16 @@ export default (state = INITIAL_STATE, action: any) => {
       return selectProjectSuccess(state, action)
     case ActionTypes.SELECT_PROJECT_FAIL:
       return selectProjectFail(state, action)
+
+    case ActionTypes.UPDATE_PROJECT_SUCCESS:
+      return updateProjectSuccess(state, action)
+    case ActionTypes.UPDATE_PROJECT_FAIL:
+      return updateProjectFail(state, action)
+
+    case ActionTypes.GET_MEMBERS_SUCCESS:
+      return getMembersSuccess(state, action)
+    case ActionTypes.GET_MEMBERS_FAIL:
+      return getMembersFail(state, action)
 
     case PURGE:
       return INITIAL_STATE

@@ -5,13 +5,13 @@ import { Formik } from 'formik'
 import { useHistory, useParams } from 'react-router-dom'
 import * as actions from '../../../store/actions'
 import { ContentModel } from '../../../store/reducers/content.reducers'
-import { FieldContainer, HeaderPadding, StyledForm } from './styled'
+import { FieldContainer, StyledForm } from './styled'
 import { GreenSquareButton, SquareButton } from '../../../components/buttons'
 import colors from '../../../styles/colors'
 import { Heading2, Heading5 } from '../../../styles/text'
 import validation, { generateValidators } from '../../../utils/validation'
 import { useSelector, useThunkDispatch } from '../../../hooks/redux'
-import { SubHeader } from '../../../components/common'
+import { HeaderPadding, SubHeader } from '../../../components/common'
 import { getById } from '../../../store/reducers/template.reducers'
 import StringField from './fieldEditors/StringField'
 import { generateContentFields, templateFieldNames } from './utils'
@@ -63,7 +63,7 @@ const CreateContentScreen: FunctionComponent<Props> = () => {
       }}
       onSubmit={onSubmit}
       validationSchema={yup.object().shape({
-        contentName: validation.fieldName(usedContentNames),
+        contentName: validation.uniqueName(usedContentNames),
         isPublic: validation.booleanField,
         ...generateValidators(template.templateFields),
       })}
@@ -81,7 +81,7 @@ const CreateContentScreen: FunctionComponent<Props> = () => {
                 <GreenSquareButton type="submit" margin="0 16px">
                   Save
                 </GreenSquareButton>
-                <SquareButton onClick={navigateToContent}>Cancel</SquareButton>
+                <SquareButton onClick={navigateToContent} type="button">Cancel</SquareButton>
               </HeaderPadding>
             </SubHeader>
             <FieldContainer>

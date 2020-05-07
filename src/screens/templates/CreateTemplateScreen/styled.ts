@@ -8,13 +8,6 @@ export const StyledForm = styled(Form)`
   align-items: center;
 `
 
-export const HeaderPadding = styled.div`
-  align-items: center;
-  text-align: center;
-  display: flex;
-  padding: 10px 25px;
-`
-
 export const StyledErrorMessage = styled(ErrorMessage)`
   color: ${colors.redLight};
 `
