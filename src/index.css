@@ -13,16 +13,15 @@ body {
 
 html,
 body,
-#root,
-#root > div {
-  height: 100%;
+#root{
+
   margin: 0;
   padding: 0;
 }
 
 #root > div {
-  display: flex;
-  flex-direction: column;
+
+
 }
 
 button {

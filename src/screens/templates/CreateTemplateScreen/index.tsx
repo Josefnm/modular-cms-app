@@ -12,7 +12,6 @@ import {
   BlueSquareButton,
   GreenSquareButton,
   LinkButton,
-  RedSquareButton,
   SquareButton,
 } from '../../../components/buttons'
 import colors from '../../../styles/colors'
@@ -23,7 +22,7 @@ import validation from '../../../utils/validation'
 import TemplateField from '../../../components/TemplateField'
 import NamePicker, { TitleForm } from '../../../components/NamePicker'
 import { useThunkDispatch } from '../../../hooks/redux'
-import { HeaderPadding, SubHeader } from '../../../components/common'
+import { HeaderPadding, ScreenContainer, SubHeader } from '../../../components/common'
 
 export type TemplateForm = {
   templateFields: TemplateFieldModel[]
@@ -83,7 +82,7 @@ const CreateTemplateScreen: FunctionComponent<Props> = () => {
         <FieldArray
           name="templateFields"
           render={arrayHelpers => (
-            <>
+            <ScreenContainer>
               <StyledForm>
                 <SubHeader>
                   <HeaderPadding>
@@ -95,16 +94,17 @@ const CreateTemplateScreen: FunctionComponent<Props> = () => {
                     </LinkButton>
                   </HeaderPadding>
                   <HeaderPadding>
-                    <BlueSquareButton type="button" onClick={() => setFieldPickerOpen(true)}>
+                    <BlueSquareButton
+                      margin="0 16px"
+                      type="button"
+                      onClick={() => setFieldPickerOpen(true)}
+                    >
                       Add field
                     </BlueSquareButton>
-                    <GreenSquareButton type="submit" margin="0 16px">
-                      Save
-                    </GreenSquareButton>
-                    <SquareButton type="button">Cancel</SquareButton>
-                    <RedSquareButton margin="0 16px" type="button">
-                      Delete
-                    </RedSquareButton>
+                    <GreenSquareButton type="submit">Save</GreenSquareButton>
+                    <SquareButton margin="0 16px" type="button">
+                      Cancel
+                    </SquareButton>
                   </HeaderPadding>
                 </SubHeader>
 
@@ -132,7 +132,7 @@ const CreateTemplateScreen: FunctionComponent<Props> = () => {
                   title={templateTitle}
                 />
               </Modal>
-            </>
+            </ScreenContainer>
           )}
         />
       )}

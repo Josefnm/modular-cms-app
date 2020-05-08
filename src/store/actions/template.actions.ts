@@ -5,16 +5,16 @@ import { client } from '../../network/axios-client'
 import * as ActionTypes from './ActionTypes'
 import { TemplateModel } from '../reducers/template.reducers'
 
-const getOwnTemplatesSuccess = (templates: TemplateModel[]) => {
+const getProjectTemplatesSuccess = (templates: TemplateModel[]) => {
   return {
-    type: ActionTypes.GET_OWN_TEMPLATES_SUCCESS,
+    type: ActionTypes.GET_PROJECT_TEMPLATES_SUCCESS,
     templates,
   }
 }
 
-const getOwnTemplatesFail = (error: string) => {
+const getProjectTemplatesFail = (error: string) => {
   return {
-    type: ActionTypes.GET_OWN_TEMPLATES_FAIL,
+    type: ActionTypes.GET_PROJECT_TEMPLATES_FAIL,
     error,
   }
 }
@@ -29,9 +29,9 @@ export const getTemplates = () => async (
   try {
     const response = await client.get(`template/projectId/${selectedProject}`)
     const templates = response.data
-    dispatch(getOwnTemplatesSuccess(templates))
+    dispatch(getProjectTemplatesSuccess(templates))
   } catch (error) {
-    dispatch(getOwnTemplatesFail(error.message))
+    dispatch(getProjectTemplatesFail(error.message))
   }
 }
 

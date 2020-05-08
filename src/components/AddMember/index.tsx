@@ -12,7 +12,7 @@ import { SquareButton } from '../buttons'
 import ModalHeader from '../ModalHeader'
 import Table from '../Table'
 import { UserModel } from '../../store/reducers/user.reducers'
-import { useSearch } from '../../hooks/useSearch'
+import { useSimpleSearch } from '../../hooks/useSimpleSearch'
 
 type Props = {
   setModalOpen: Dispatch<SetStateAction<boolean>>
@@ -21,16 +21,14 @@ type Props = {
 }
 
 const AddMember: FunctionComponent<Props> = ({ projectId, setModalOpen, arrayHelpers }) => {
-  const [users, searchUsers] = useSearch<UserModel[]>(
+  const [users, searchUsers] = useSimpleSearch<UserModel[]>(
     `/user/search?projectId=${projectId}&searchString=`,
     []
   )
 
   const addMember = useCallback(
-    (user: UserModel) => async () => {
-      const { members }: { members: UserModel[] } = arrayHelpers.form.values
-      const res = members.find(member => member.id === user.id)
-      if (!res) await arrayHelpers.push(user)
+    (user: UserModel) => () => {
+      arrayHelpers.push(user)
       setModalOpen(false)
     },
     [arrayHelpers, setModalOpen]

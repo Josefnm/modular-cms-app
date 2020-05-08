@@ -20,7 +20,7 @@ const ModuleField: FunctionComponent<Props> = ({ name }) => {
 
   const projectContent = useSelector(state => state.content.projectContent)
   const projectTemplates = useSelector(state => state.template.projectTemplates)
-  const [modalOpen, setModalOpen] = useState(true)
+  const [modalOpen, setModalOpen] = useState(false)
   const [selectedContent, setSelectedContent] = useState<ContentModelWithName>(undefined)
 
   useEffect(() => {

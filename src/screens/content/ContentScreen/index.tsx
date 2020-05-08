@@ -1,15 +1,8 @@
 import React, { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
-import { BsPuzzle } from 'react-icons/bs'
 import { useHistory } from 'react-router-dom'
-import {
-  ButtonContainer,
-  Container,
-  Menu,
-  MenuButton,
-  MenuContainer,
-  TableContainer,
-} from './styled'
-import { HeaderPadding, SubHeader } from '../../../components/common'
+import { RiFileEditLine } from 'react-icons/ri'
+import { ButtonContainer, Menu, MenuButton, MenuContainer, TableContainer } from './styled'
+import { HeaderPadding, ScreenContainer, SubHeader } from '../../../components/common'
 import colors from '../../../styles/colors'
 import { Heading2, Heading4 } from '../../../styles/text'
 import { BlueSquareButton } from '../../../components/buttons'
@@ -53,7 +46,7 @@ const ContentScreen: FunctionComponent<Props> = () => {
 
   const access = (isPublic: boolean) => (isPublic ? 'Public' : 'Private')
 
-  const rowValues = useMemo(() => {
+  const bodyValues = useMemo(() => {
     return projectContent.map(content => {
       return {
         values: [
@@ -82,10 +75,10 @@ const ContentScreen: FunctionComponent<Props> = () => {
   const headerValues = ['Name', 'Template', 'Author', 'Created', 'Access']
 
   return (
-    <Container>
+    <ScreenContainer>
       <SubHeader>
         <HeaderPadding>
-          <BsPuzzle size={40} style={{ color: colors.greenLight }} />
+          <RiFileEditLine size={40} style={{ color: colors.greenLight }} />
           <Heading2 marginHorizontal={10}>Content</Heading2>
         </HeaderPadding>
         <ButtonContainer>
@@ -107,9 +100,9 @@ const ContentScreen: FunctionComponent<Props> = () => {
         </ButtonContainer>
       </SubHeader>
       <TableContainer>
-        <Table headerValues={headerValues} bodyValues={rowValues} />
+        <Table headerValues={headerValues} bodyValues={bodyValues} />
       </TableContainer>
-    </Container>
+    </ScreenContainer>
   )
 }
 

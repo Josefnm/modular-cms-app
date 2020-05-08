@@ -38,6 +38,7 @@ export const StyledTable = styled.table`
   border-radius: 5px;
   border: ${colors.grey4} 1px solid;
   border-top-width: 0;
+  overflow: auto;
 `
 
 type RowProps = {

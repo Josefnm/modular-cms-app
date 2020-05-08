@@ -3,12 +3,6 @@ import { ButtonBase } from '../../../components/buttons'
 import colors from '../../../styles/colors'
 import { HeaderPadding } from '../../../components/common'
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
 export const ButtonContainer = styled(HeaderPadding)`
   flex-direction: column;
 `
@@ -24,6 +18,7 @@ export const MenuButton = styled(ButtonBase)`
     background-color: ${colors.grey7};
   }
 `
+
 type Props = {
   isOpen: boolean
 }
