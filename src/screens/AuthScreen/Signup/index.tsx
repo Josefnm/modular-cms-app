@@ -43,7 +43,7 @@ const Signup: FC<Props> = () => {
     >
       {({ isValid }) => (
         <StyledForm>
-          <FormikField name="userName" type="text" label="Username" />
+          <FormikField name="name" type="text" label="Username" />
           <FormikField name="email" type="email" label="Email" />
           <FormikField name="password" type="password" label="Password" />
           <FormikField name="confirmPassword" type="password" label="Confirm password" />
