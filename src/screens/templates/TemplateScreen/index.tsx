@@ -9,7 +9,7 @@ import colors from '../../../styles/colors'
 import { Heading2 } from '../../../styles/text'
 import { BlueSquareButton } from '../../../components/buttons'
 import { HeaderPadding, ScreenContainer, SubHeader } from '../../../components/common'
-import Table from '../../../components/Table'
+import Table from '../../../components/tables/Table'
 import { useTemplateSearch } from '../../../hooks/useTemplateSearch'
 
 type Props = {}

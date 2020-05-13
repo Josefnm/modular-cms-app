@@ -32,7 +32,7 @@ export const getTemplates = () => async (
     console.log('templates', templates)
     dispatch(getProjectTemplatesSuccess(templates))
   } catch (error) {
-    dispatch(getProjectTemplatesFail(error.message))
+    dispatch(getProjectTemplatesFail(error.response.message))
   }
 }
 
@@ -50,14 +50,13 @@ export const createTemplate = (templateForm: TemplateModel) => async (
     ownerId: profile.id,
     projectId: selectedProject,
   }
-
   try {
     const response = await client.post(`/template`, template)
     console.log(response)
     dispatch(createTemplateSuccess())
     dispatch(getTemplates())
   } catch (error) {
-    console.log(error)
+    console.log(error.response.message)
     dispatch(createTemplateFail(error.response.message))
   }
 }

@@ -57,8 +57,8 @@ export const createContent = (contentForm: ContentModel) => async (
     console.log(response)
     dispatch(createContentSuccess(response.data))
   } catch (error) {
-    console.log(error)
-    dispatch(createContentFail(error.message))
+    console.log('create content fail', error.response.message)
+    dispatch(createContentFail(error.response.message))
   }
 }
 

@@ -6,7 +6,7 @@ import Modal from '../../../../../components/Modal'
 import ModalHeader from '../../../../../components/ModalHeader'
 import { BorderContainer, Container, TableContainer } from './styled'
 import { useSelector } from '../../../../../hooks/redux'
-import Table from '../../../../../components/Table'
+import Table from '../../../../../components/tables/Table'
 import { ContentModel } from '../../../../../store/reducers/content.reducers'
 
 type Props = {

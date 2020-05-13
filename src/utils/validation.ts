@@ -42,7 +42,7 @@ const uniqueName = (name: string[]) => {
 const stringField = yup.string().max(255, 'Too long')
 
 const textField = yup.string().max(10000, 'Too long')
-const imageField = yup.object()
+const imageField = yup.string()
 
 const dateField = yup.date().nullable(true)
 

@@ -36,7 +36,7 @@ export const Menu = styled.div<Props>`
   border: ${({ isOpen }) => (isOpen ? `${colors.grey6} 1px solid` : 0)};
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: 600px;
+  max-height: 50vh;
 `
 
 export const MenuContainer = styled.div``

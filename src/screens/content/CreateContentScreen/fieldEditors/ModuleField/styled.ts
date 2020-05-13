@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import colors from '../../../../../styles/colors'
 
 export const Container = styled.div`
-  width: 670px;
+  width: 50vw;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
@@ -11,10 +11,9 @@ export const Container = styled.div`
 `
 
 export const TableContainer = styled.div`
+  flex: 1;
   padding: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow-y: auto;
 `
 
 export const BorderContainer = styled.div`

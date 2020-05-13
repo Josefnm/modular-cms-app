@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react'
-import { HeaderTableCell, StyledTable, TableCell, TableRow, TemplateTableHeader } from './styled'
+import { HeaderTableCell, StyledTable, TableCell, TableRow, TableHeader } from './styled'
 
 type Props = {
   headerValues: string[]
@@ -8,14 +8,14 @@ type Props = {
 
 const Table: FC<Props> = ({ headerValues, bodyValues }) => {
   const tableBody = useMemo(() => {
-    return bodyValues.map(rowValues => (
+    return bodyValues.map((rowValues, index) => (
       <TableRow
-        key={rowValues.values[0]}
+        key={rowValues.values[0] + 1}
         onClick={rowValues.onClick}
         clickable={!!rowValues.onClick}
       >
-        {rowValues.values.map(value => (
-          <TableCell key={value}>{value}</TableCell>
+        {rowValues.values.map((value, index2) => (
+          <TableCell key={value + 2}>{value}</TableCell>
         ))}
       </TableRow>
     ))
@@ -31,9 +31,9 @@ const Table: FC<Props> = ({ headerValues, bodyValues }) => {
 
   return (
     <StyledTable>
-      <TemplateTableHeader>
+      <TableHeader>
         <tr>{tableHead}</tr>
-      </TemplateTableHeader>
+      </TableHeader>
       <tbody>{tableBody}</tbody>
     </StyledTable>
   )

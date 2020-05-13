@@ -18,8 +18,8 @@ export const getProjects = () => async (dispatch: ThunkDispatch<MainState, {}, A
     dispatch(getOwnProjectsSuccess(projects))
     dispatch(selectDefaultProject())
   } catch (error) {
-    console.log('get own projects error', error.message)
-    dispatch(getOwnProjectsFail(error.message))
+    console.log('get own projects error', error.response.message)
+    dispatch(getOwnProjectsFail(error.response.message))
   }
 }
 
@@ -57,7 +57,7 @@ export const createProject = (projectForm: ProjectForm) => async (
     await dispatch(selectProject(data.id))
   } catch (error) {
     console.log(error)
-    dispatch(createProjectFail(error.message))
+    dispatch(createProjectFail(error.response.message))
   }
 }
 
@@ -93,8 +93,8 @@ export const updateProject = (form: UpdateProjectForm) => async (
     dispatch(getMembers(data.id))
     console.log('update proj success', data)
   } catch (error) {
-    console.log('update project error:', error.message)
-    dispatch(updateProjectFail(error.message))
+    console.log('update project error:', error.response.message)
+    dispatch(updateProjectFail(error.response.message))
   }
 }
 
@@ -116,15 +116,14 @@ export const deleteProject = (projectId: string) => async (
   dispatch: ThunkDispatch<MainState, {}, Action>
 ) => {
   try {
-    const response = await client.delete(`/project/${projectId}`)
+    await client.delete(`/project/${projectId}`)
 
     dispatch(deleteProjectSuccess())
     await dispatch(getProjects())
     dispatch(selectDefaultProject())
-    console.log('delete proj success')
   } catch (error) {
-    console.log('delete project error:', error.message)
-    dispatch(deleteProjectFail(error.message))
+    console.log('delete project error:', error.response.message)
+    dispatch(deleteProjectFail(error.response.message))
   }
 }
 
@@ -171,7 +170,7 @@ export const selectProject = (projectId: string) => async (
     dispatch(actions.getContent())
     dispatch(actions.getMembers(projectId))
   } catch (error) {
-    console.log('select project error', error.message)
+    console.log('select project error')
     dispatch(selectProjectFail('Group not found in the state'))
   }
 }
@@ -184,8 +183,8 @@ export const getMembers = (projectId: string) => async (
 
     dispatch(getMembersSuccess(data))
   } catch (error) {
-    console.log('get members error', error)
-    dispatch(getMembersFail(error.message))
+    console.log('get members error', error.response.message)
+    dispatch(getMembersFail(error.response.message))
   }
 }
 
