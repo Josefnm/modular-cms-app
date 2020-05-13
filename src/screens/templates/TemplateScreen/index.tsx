@@ -2,13 +2,13 @@ import React, { FunctionComponent, useCallback, useEffect, useMemo } from 'react
 import { BsPuzzle } from 'react-icons/bs'
 import { useHistory } from 'react-router-dom'
 import * as actions from '../../../store/actions'
-import { Container, TableContainer } from './styled'
+import { TableContainer } from './styled'
 import { useSelector, useThunkDispatch } from '../../../hooks/redux'
 import { formatTimestamp } from '../../../utils/timeUtils'
 import colors from '../../../styles/colors'
 import { Heading2 } from '../../../styles/text'
 import { BlueSquareButton } from '../../../components/buttons'
-import { HeaderPadding, SubHeader } from '../../../components/common'
+import { HeaderPadding, ScreenContainer, SubHeader } from '../../../components/common'
 import Table from '../../../components/Table'
 
 type Props = {}
@@ -49,7 +49,7 @@ const TemplateScreen: FunctionComponent<Props> = () => {
   const headerValues = ['Name', 'Description', 'Fields', 'Created', 'By']
 
   return (
-    <Container>
+    <ScreenContainer>
       <SubHeader>
         <HeaderPadding>
           <BsPuzzle size={40} style={{ color: colors.greenLight }} />
@@ -64,7 +64,7 @@ const TemplateScreen: FunctionComponent<Props> = () => {
       <TableContainer>
         <Table headerValues={headerValues} bodyValues={rowValues} />
       </TableContainer>
-    </Container>
+    </ScreenContainer>
   )
 }
 

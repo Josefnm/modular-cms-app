@@ -9,6 +9,19 @@ import { ProjectForm } from '../../components/CreateProject'
 import { UserModel } from '../reducers/user.reducers'
 import { UpdateProjectForm } from '../../screens/SettingsScreen'
 
+export const getProjects = () => async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
+  try {
+    const response = await client.get('/project/user')
+    const projects = response.data
+    console.log('get own projects', projects)
+    dispatch(getOwnProjectsSuccess(projects))
+    dispatch(selectDefaultProject())
+  } catch (error) {
+    console.log('get own projects error', error.message)
+    dispatch(getOwnProjectsFail(error.message))
+  }
+}
+
 const getOwnProjectsSuccess = (projects: ProjectModel[]) => {
   return {
     type: ActionTypes.GET_OWN_PROJECTS_SUCCESS,
@@ -20,19 +33,6 @@ const getOwnProjectsFail = (error: string) => {
   return {
     type: ActionTypes.GET_OWN_PROJECTS_FAIL,
     error,
-  }
-}
-
-export const getProjects = () => async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
-  try {
-    const response = await client.get('/project/user')
-    const projects = response.data
-    console.log('get own projects', projects)
-    dispatch(getOwnProjectsSuccess(projects))
-    dispatch(selectDefaultProject())
-  } catch (error) {
-    console.log('get own projects error', error.message)
-    dispatch(getOwnProjectsFail(error.message))
   }
 }
 

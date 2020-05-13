@@ -14,9 +14,7 @@ type Props = {
   templateFields: TemplateFieldModel[]
 }
 
-const ContentFields: FunctionComponent<Props> = ({
-  templateFields,
-}) => {
+const ContentFields: FunctionComponent<Props> = ({ templateFields }) => {
   const formFields = useMemo(() => {
     return templateFields.map(templateField => {
       switch (templateField.dataType) {

@@ -63,9 +63,9 @@ export const getById = (state: MainState, id: string) => {
 
 export default (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
-    case ActionTypes.GET_OWN_TEMPLATES_SUCCESS:
+    case ActionTypes.GET_PROJECT_TEMPLATES_SUCCESS:
       return getProjectTemplatesSuccess(state, action)
-    case ActionTypes.GET_OWN_TEMPLATES_FAIL:
+    case ActionTypes.GET_PROJECT_TEMPLATES_FAIL:
       return getProjectTemplatesFail(state, action)
 
     case ActionTypes.CREATE_TEMPLATE_SUCCESS:

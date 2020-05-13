@@ -17,9 +17,11 @@ const Modal: FunctionComponent<Props> = ({ isOpen, children, setIsOpen, onClose 
     if (onClose) onClose()
   }
   return (
-    <Container onClick={closeModal}>
-      <div onClick={stopPropagation}>{children}</div>
-    </Container>
+    <div style={{ zIndex: 200 }}>
+      <Container onClick={closeModal}>
+        <div onClick={stopPropagation}>{children}</div>
+      </Container>
+    </div>
   )
 }
 

@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback, useState } from 'react'
 import { client } from '../network/axios-client'
 
-export const useSearch = <R>(
+export const useSimpleSearch = <R>(
   url: string,
   initState: R
 ): [R, (event?: ChangeEvent<HTMLInputElement>) => Promise<void>] => {

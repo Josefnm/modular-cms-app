@@ -1,4 +1,12 @@
-import { BsPuzzle } from 'react-icons/bs'
+import {
+  AiOutlineFieldNumber,
+  BsImage,
+  BsLink,
+  GoCalendar,
+  MdCheckBox,
+  MdTextFields,
+  TiDocumentText,
+} from 'react-icons/all'
 import { IconType } from 'react-icons'
 
 export type FieldType = {
@@ -20,90 +28,45 @@ export enum DataType {
 
 export const fieldTypes: FieldType[] = [
   {
-    iconType: BsPuzzle,
+    iconType: TiDocumentText,
     headerText: 'Rich text',
     bodyText: 'Text formatting with references and media',
     type: DataType.TEXT,
   },
   {
-    iconType: BsPuzzle,
+    iconType: MdTextFields,
     headerText: 'Text',
     bodyText: 'Titles, names, paragraphs, list of names',
     type: DataType.STRING,
   },
   {
-    iconType: BsPuzzle,
+    iconType: AiOutlineFieldNumber,
     headerText: 'Number',
     bodyText: 'ID, order number, rating, quantity',
     type: DataType.NUMBER,
   },
   {
-    iconType: BsPuzzle,
+    iconType: GoCalendar,
     headerText: 'Date and time',
     bodyText: 'Event dates',
     type: DataType.DATE,
   },
   {
-    iconType: BsPuzzle,
+    iconType: BsImage,
     headerText: 'Image',
     bodyText: 'Jpg, gif, png',
     type: DataType.IMAGE,
   },
   {
-    iconType: BsPuzzle,
+    iconType: MdCheckBox,
     headerText: 'Boolean',
-    bodyText: 'Yes or no, 1 or 0, true or false',
+    bodyText: 'Yes or no, true or false',
     type: DataType.BOOL,
   },
   {
-    iconType: BsPuzzle,
+    iconType: BsLink,
     headerText: 'Reference',
-    bodyText: 'For example, a blog post can reference its author(s)',
+    bodyText: 'Reference to another content document',
     type: DataType.MODULE,
   },
 ]
-
-/* {
-    iconType: BsPuzzle,
-    headerText: 'Text',
-    bodyText: 'Titles, names, paragraphs, list of names',
-    dataType: DataType.STRING,
-  },
-  {
-    iconType: BsPuzzle,
-    headerText: 'Number',
-    bodyText: 'ID, order number, rating, quantity',
-    dataType: DataType.NUMBER,
-  },
-  {
-    iconType: BsPuzzle,
-    headerText: 'Date and time',
-    bodyText: 'Event dates',
-    dataType: DataType.DATE,
-  },
-  {
-    iconType: BsPuzzle,
-    headerText: 'Location',
-    bodyText: 'Coordinates: latitude and longitude',
-    dataType: DataType.LOCATION,
-  },
-  {
-    iconType: BsPuzzle,
-    headerText: 'Media',
-    bodyText: 'Images, videos, PDFs and other files',
-    dataType: DataType.MEDIA,
-  },
-  {
-    iconType: BsPuzzle,
-    headerText: 'Boolean',
-    bodyText: 'Yes or no, 1 or 0, true or false',
-    dataType: DataType.BOOL,
-  },
-  {
-    iconType: BsPuzzle,
-    headerText: 'Reference',
-    bodyText: 'For example, a blog post can reference its author(s)',
-    dataType: DataType.MODULE,
-  },
-]
-*/

@@ -7,14 +7,14 @@ import { ContentModel } from '../reducers/content.reducers'
 
 const getOwnContentsSuccess = (contents: ContentModel[]) => {
   return {
-    type: ActionTypes.GET_OWN_CONTENT_SUCCESS,
+    type: ActionTypes.GET_PROJECT_CONTENT_SUCCESS,
     contents,
   }
 }
 
 const getOwnContentsFail = (error: string) => {
   return {
-    type: ActionTypes.GET_OWN_CONTENT_FAIL,
+    type: ActionTypes.GET_PROJECT_CONTENT_FAIL,
     error,
   }
 }

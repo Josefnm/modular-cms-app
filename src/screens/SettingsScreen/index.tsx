@@ -1,13 +1,13 @@
 import React, { FunctionComponent, useCallback, useMemo, useState } from 'react'
 import { FieldArray, Formik } from 'formik'
-import { BsPuzzle } from 'react-icons/bs'
+import { MdSettings } from 'react-icons/all'
 import * as yup from 'yup'
-import { CenterContainer, StyledForm } from './styled'
+import { FormContainer, Container } from './styled'
 import { Heading2, Heading5 } from '../../styles/text'
 import { useSelector, useThunkDispatch } from '../../hooks/redux'
 import { BlueSquareButton, GreenSquareButton, RedSquareButton } from '../../components/buttons'
 import { ProjectForm } from '../../components/CreateProject'
-import { HeaderPadding, SubHeader } from '../../components/common'
+import { HeaderPadding, ScreenContainer, SubHeader } from '../../components/common'
 import colors from '../../styles/colors'
 import { getSelectedProject } from '../../store/reducers/project.reducers'
 import validation from '../../utils/validation'
@@ -68,31 +68,43 @@ const SettingsScreen: FunctionComponent<Props> = () => {
       })}
     >
       {({ values }) => (
-        <CenterContainer>
-          <SubHeader>
-            <HeaderPadding>
-              <BsPuzzle size={40} style={{ color: colors.greenLight }} />
-              <Heading2 marginHorizontal={10}>Project settings</Heading2>
-            </HeaderPadding>
-            <HeaderPadding>
-              <BlueSquareButton margin="0 16px" onClick={() => setModalOpen(true)} type="button">
-                Add member
-              </BlueSquareButton>
-              <RedSquareButton onClick={deleteProject} type="button">
-                Delete project and all its content
-              </RedSquareButton>
-              <GreenSquareButton type="submit" margin="0 16px">
-                Save
-              </GreenSquareButton>
-            </HeaderPadding>
-          </SubHeader>
-          <StyledForm>
-            <FormField name="name" type="text" label="Name" />
-            <FormField name="description" type="text" label="Description" component="textarea" />
+        <ScreenContainer>
+          <FormContainer>
+            <SubHeader>
+              <HeaderPadding>
+                <MdSettings size={40} style={{ color: colors.greenLight }} />
+                <Heading2 marginHorizontal={10}>Project settings</Heading2>
+              </HeaderPadding>
+              <HeaderPadding>
+                <BlueSquareButton margin="0 16px" onClick={() => setModalOpen(true)} type="button">
+                  Add member
+                </BlueSquareButton>
+                <RedSquareButton onClick={deleteProject} type="button">
+                  Delete project and all its content
+                </RedSquareButton>
+                <GreenSquareButton type="submit" margin="0 16px">
+                  Save
+                </GreenSquareButton>
+              </HeaderPadding>
+            </SubHeader>
             <FieldArray
               name="members"
               render={arrayHelpers => (
                 <>
+                  <Container>
+                    <FormField name="name" type="text" label="Name" />
+                    <FormField
+                      name="description"
+                      type="text"
+                      label="Description"
+                      component="textarea"
+                    />
+                    <Heading5 marginVertical={15}>Members</Heading5>
+                    <Table
+                      bodyValues={tableBody(values.members)}
+                      headerValues={['Name', 'Email']}
+                    />
+                  </Container>
                   <Modal isOpen={modalOpen} setIsOpen={setModalOpen}>
                     <AddMember
                       setModalOpen={setModalOpen}
@@ -100,13 +112,11 @@ const SettingsScreen: FunctionComponent<Props> = () => {
                       arrayHelpers={arrayHelpers}
                     />
                   </Modal>
-                  <Heading5 marginVertical={15}>Members</Heading5>
-                  <Table bodyValues={tableBody(values.members)} headerValues={['Name', 'Email']} />
                 </>
               )}
             />
-          </StyledForm>
-        </CenterContainer>
+          </FormContainer>
+        </ScreenContainer>
       )}
     </Formik>
   )

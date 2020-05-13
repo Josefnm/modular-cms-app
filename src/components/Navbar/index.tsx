@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { useHistory } from 'react-router-dom'
 import * as actions from '../../store/actions'
-import { Container, StyledButton, StyledLink } from './styled'
+import { Container, SpaceBetween, StyledButton, StyledLink } from './styled'
 import SideBar from '../SideBar'
 import { useThunkDispatch } from '../../hooks/redux'
 
@@ -17,17 +17,17 @@ const NavBar: FunctionComponent<Props> = () => {
   return (
     <Container>
       <SideBar />
-      <StyledLink exact to="/">
-        home
-      </StyledLink>
-      <StyledLink to="/templates">Templates</StyledLink>
-      <StyledLink exact to="/content">
-        Content
-      </StyledLink>
-      <StyledLink exact to="/settings">
-        Settings
-      </StyledLink>
-      <StyledButton onClick={onLogout}>Log out</StyledButton>
+      <SpaceBetween>
+        <StyledLink exact to="/">
+          home
+        </StyledLink>
+        <StyledLink to="/templates">Templates</StyledLink>
+        <StyledLink to="/content">Content</StyledLink>
+        <StyledLink exact to="/settings">
+          Settings
+        </StyledLink>
+        <StyledButton onClick={onLogout}>Log out</StyledButton>
+      </SpaceBetween>
     </Container>
   )
 }

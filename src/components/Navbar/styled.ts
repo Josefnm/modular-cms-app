@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { CSSProperties } from 'react'
 import { ButtonBase } from '../buttons'
 import { textColors } from '../../styles/text'
+import colors from '../../styles/colors'
 
 const activeStyle: CSSProperties = {
   color: textColors.blue,
@@ -34,7 +35,18 @@ export const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: #263545;
+  position: fixed;
+  top: 0;
+  background-color: ${colors.blueDark};
   height: 70px;
   width: 100%;
+  z-index: 100;
+`
+
+export const SpaceBetween = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 `

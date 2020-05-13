@@ -60,9 +60,9 @@ const createContentFail = (state: ContentState, action: { error: AxiosError }) =
 }
 export default (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
-    case ActionTypes.GET_OWN_CONTENT_SUCCESS:
+    case ActionTypes.GET_PROJECT_CONTENT_SUCCESS:
       return getProjectContentsSuccess(state, action)
-    case ActionTypes.GET_OWN_CONTENT_FAIL:
+    case ActionTypes.GET_PROJECT_CONTENT_FAIL:
       return getProjectContentsFail(state, action)
 
     case ActionTypes.CREATE_CONTENT_SUCCESS:
