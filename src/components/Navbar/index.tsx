@@ -19,10 +19,11 @@ const NavBar: FC<Props> = () => {
       <SideBar />
       <SpaceBetween>
         <StyledLink exact to="/">
-          home
+          Home
         </StyledLink>
         <StyledLink to="/templates">Templates</StyledLink>
         <StyledLink to="/content">Content</StyledLink>
+        <StyledLink to="/public">Public</StyledLink>
         <StyledLink exact to="/settings">
           Settings
         </StyledLink>

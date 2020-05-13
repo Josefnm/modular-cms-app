@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import colors from '../../styles/colors'
+import colors from '../../../styles/colors'
 
 export const TableCell = styled.td`
   text-align: left;
-  min-width: 200px;
+  min-width: 12vw;
   font-weight: 500;
   font-size: 16px;
   margin: 0 10px;
@@ -26,7 +26,7 @@ export const HeaderTableCell = styled(TableCell)<HeaderProps>`
   }
 `
 
-export const TemplateTableHeader = styled.thead`
+export const TableHeader = styled.thead`
   min-height: 38px;
   background-color: ${colors.grey7};
 `
@@ -39,6 +39,7 @@ export const StyledTable = styled.table`
   border: ${colors.grey4} 1px solid;
   border-top-width: 0;
   overflow: auto;
+  flex:1;
 `
 
 type RowProps = {

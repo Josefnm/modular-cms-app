@@ -2,7 +2,16 @@ import { Dispatch, useEffect, useReducer, useState } from 'react'
 import { client } from '../config/axios-client'
 import { useSelector } from './redux'
 import { ContentModel } from '../store/reducers/content.reducers'
-import { SearchField, SearchForm } from '../components/ContentSearch'
+
+export type SearchField = {
+  name: string
+  parameters: any
+  type: string
+}
+
+export type SearchForm = {
+  [key: string]: SearchField
+}
 
 export enum SearchActionKey {
   SET = 'SET',
@@ -27,16 +36,21 @@ const reducer = (state: SearchForm, action: SearchAction): SearchForm => {
   }
 }
 
-export const useContentSearch = (): [ContentModel[], SearchForm, Dispatch<SearchAction>] => {
+export const useContentSearch = (
+  initProj = ''
+): [
+  ContentModel[],
+  Dispatch<SearchAction>,
+  (value: ((prevState: string) => string) | string) => void
+] => {
   const { projectContent } = useSelector(state => state.content)
-  const { selectedProject } = useSelector(state => state.project)
+  const [selectedProject, setSelectedProject] = useState<string>(initProj)
   const [content, setContent] = useState<ContentModel[]>([])
   const [searchForm, dispatch] = useReducer(reducer, {})
   useEffect(() => {
     const func = async () => {
       const body = Object.values(searchForm)
-      console.log('body', body)
-      if (!body.length) {
+      if (!body.length && selectedProject) {
         setContent(projectContent)
       } else {
         try {
@@ -52,5 +66,5 @@ export const useContentSearch = (): [ContentModel[], SearchForm, Dispatch<Search
     }
     func()
   }, [projectContent, searchForm, selectedProject])
-  return [content, searchForm, dispatch]
+  return [content, dispatch, setSelectedProject]
 }

@@ -7,7 +7,6 @@ export type SearchFieldType = {
   type: string
 }
 
-
 /*
   TEXT = 'BooleanSearch',
   CREATED = 'CreatedSearch',

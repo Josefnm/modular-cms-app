@@ -61,7 +61,7 @@ export const signup = (form: SignupForm) => {
       await dispatch(firebaseLogin(form))
       dispatch(signupSuccess(user))
     } catch (error) {
-      dispatch(signupFail(error.message))
+      dispatch(signupFail(error.response.message))
     }
   }
 }
@@ -74,7 +74,7 @@ export const getProfile = () => {
       console.log('user', user)
       dispatch(getProfileSuccess(user))
     } catch (error) {
-      dispatch(getProfileFail(error.message))
+      dispatch(getProfileFail(error.response.message))
     }
   }
 }
@@ -89,15 +89,21 @@ export const logout = () => {
 export const firebaseLogin = (form: LoginForm) => {
   return async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
     try {
-      console.log('current user', firebase.auth().currentUser)
       if (firebase.auth().currentUser) {
         await dispatch(actions.logout())
       }
-      const userCredential = await firebase
-        .auth()
-        .signInWithEmailAndPassword(form.email, form.password)
-      const token = await userCredential.user.getIdToken()
+      const { user } = await firebase.auth().signInWithEmailAndPassword(form.email, form.password)
+
+      const token = await user.getIdToken()
+
       client.defaults.headers.authorization = `Bearer ${token}`
+
+      const userProfile: UserModel = {
+        id: user.uid,
+        name: user.displayName,
+        email: user.email,
+      }
+      dispatch(loginSuccess(userProfile))
     } catch (error) {
       dispatch(loginFail(error.message))
     }

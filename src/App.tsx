@@ -9,6 +9,7 @@ import ContentScreen from './screens/content/ContentScreen'
 import CreateContentScreen from './screens/content/CreateContentScreen'
 import SettingsScreen from './screens/SettingsScreen'
 import { useAuth } from './hooks/useAuth'
+import ViewScreen from './screens/content/ViewScreen'
 
 type OwnProps = {}
 type Props = OwnProps
@@ -32,6 +33,7 @@ const App: FC<Props> = () => {
               <Route exact path="/content" component={ContentScreen} />
               <Route exact path="/content/create/:templateId" component={CreateContentScreen} />
               <Route exact path="/settings" component={SettingsScreen} />
+              <Route exact path="/public" component={ViewScreen} />
             </>
           )}
         </Switch>

@@ -44,7 +44,6 @@ export const HeaderPadding = styled.div`
   display: flex;
   padding: 0 25px;
   justify-content: flex-end;
-
   flex-direction: row;
 `
 
@@ -55,6 +54,7 @@ export const ScreenContainer = styled.div`
   height: 100%;
   width: 100%;
   margin-top: 133px;
+  margin-bottom: 5px;
 `
 
 export const SearchInput = styled.input`
@@ -63,4 +63,9 @@ export const SearchInput = styled.input`
   font-size: 16px;
   margin-bottom: 10px;
   border: 1px solid ${colors.grey4};
+`
+
+export const StyledImage = styled.img`
+  max-width: 100%;
+  height: auto;
 `

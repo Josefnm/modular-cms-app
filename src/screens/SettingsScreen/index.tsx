@@ -14,7 +14,7 @@ import validation from '../../utils/validation'
 import FormikField from '../../components/FormikField'
 import AddMember from '../../components/AddMember'
 import Modal from '../../components/Modal'
-import Table from '../../components/Table'
+import Table from '../../components/tables/Table'
 import { UserModel } from '../../store/reducers/user.reducers'
 import * as actions from '../../store/actions'
 
