@@ -57,7 +57,6 @@ export const signup = (form: SignupForm) => {
     try {
       const response = await clientNoAuth.post('/user/signup', form)
       const user = response.data
-      console.log('user', user)
       await dispatch(firebaseLogin(form))
       dispatch(signupSuccess(user))
     } catch (error) {
