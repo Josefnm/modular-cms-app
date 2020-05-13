@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react'
+import React, { FC, useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { BsPuzzle } from 'react-icons/bs'
 import * as yup from 'yup'
@@ -30,7 +30,7 @@ export type TemplateForm = {
 
 type Props = {}
 
-const CreateTemplateScreen: FunctionComponent<Props> = () => {
+const CreateTemplateScreen: FC<Props> = () => {
   const history = useHistory()
   const dispatch = useThunkDispatch()
 

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import { HeaderTableCell, StyledTable, TableCell, TableRow, TemplateTableHeader } from './styled'
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
   bodyValues: { onClick?: () => void; values: string[] }[]
 }
 
-const Table: FunctionComponent<Props> = ({ headerValues, bodyValues }) => {
+const Table: FC<Props> = ({ headerValues, bodyValues }) => {
   const tableBody = useMemo(() => {
     return bodyValues.map(rowValues => (
       <TableRow

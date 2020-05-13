@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 
 import { Heading3 } from '../../styles/text'
 import { Header } from './styled'
 
-const ModalHeader: FunctionComponent = ({ children }) => {
+const ModalHeader: FC = ({ children }) => {
   return (
     <Header>
       <Heading3 marginLeft={30}>{children}</Heading3>

@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 import { ArrowIcon, FolderIcon, ProjectButton, ProjectName } from './styled'
 import { ProjectModel } from '../../../store/reducers/project.reducers'
 import * as actions from '../../../store/actions'
@@ -10,7 +10,7 @@ type Props = {
   isSelected: boolean
 }
 
-const SelectProject: FunctionComponent<Props> = ({ project, setModalOpen, isSelected }) => {
+const SelectProject: FC<Props> = ({ project, setModalOpen, isSelected }) => {
   const dispatch = useThunkDispatch()
   const onSelect = () => {
     dispatch(actions.selectProject(project.id))

@@ -22,7 +22,7 @@ client.interceptors.request.use(
     return newConfig
   },
   error => {
-    console.log(error)
+    console.log('f')
     return Promise.reject(error)
   }
 )

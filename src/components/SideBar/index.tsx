@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useMemo, useState } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
 import { MdMenu } from 'react-icons/all'
 import { Container, NavBarButton, Overlay, RowContainer, SideArea } from './styled'
 import { Heading2, Heading4 } from '../../styles/text'
@@ -11,7 +11,7 @@ import * as actions from '../../store/actions'
 
 type Props = {}
 
-const SideBar: FunctionComponent<Props> = () => {
+const SideBar: FC<Props> = () => {
   const selectedProject = useSelector(state => getSelectedProject(state))
   const { projects } = useSelector(state => state.project)
   const [sidebarOpen, setSideBarOpen] = useState(false)
@@ -50,18 +50,16 @@ const SideBar: FunctionComponent<Props> = () => {
         <MdMenu size={30} />
       </NavBarButton>
       {sidebarOpen && (
-        <>
-          <Container>
-            <SideArea>
-              <RowContainer>
-                <Heading4>Projects</Heading4>
-                <LinkButton onClick={onCreateClick}>+ Create project</LinkButton>
-              </RowContainer>
-              {mapProjects}
-            </SideArea>
-            <Overlay onClick={() => setSideBarOpen(false)} />
-          </Container>
-        </>
+        <Container>
+          <SideArea>
+            <RowContainer>
+              <Heading4>Projects</Heading4>
+              <LinkButton onClick={onCreateClick}>+ Create project</LinkButton>
+            </RowContainer>
+            {mapProjects}
+          </SideArea>
+          <Overlay onClick={() => setSideBarOpen(false)} />
+        </Container>
       )}
       <CreateProject modalOpen={createProjectOpen} setModalOpen={setCreateProjectOpen} />
     </>

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FC, useState } from 'react'
 import Login from './Login'
 import Signup from './Signup'
 import { LinkButton } from '../../components/buttons'
@@ -7,7 +7,7 @@ import { Container, FormContainer, LinkButtonContainer } from './styled'
 
 type Props = {}
 
-const AuthScreen: FunctionComponent<Props> = () => {
+const AuthScreen: FC<Props> = () => {
   const [loginSelected, setLoginSelected] = useState(true)
   const [buttonText, setButtonText] = useState('Sign up')
 

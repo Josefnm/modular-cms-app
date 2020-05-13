@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 
 import { FieldContainer } from './styled'
 import { TemplateFieldModel } from '../../../../store/reducers/template.reducers'
@@ -14,7 +14,7 @@ type Props = {
   templateFields: TemplateFieldModel[]
 }
 
-const ContentFields: FunctionComponent<Props> = ({ templateFields }) => {
+const ContentFields: FC<Props> = ({ templateFields }) => {
   const formFields = useMemo(() => {
     return templateFields.map(templateField => {
       switch (templateField.dataType) {

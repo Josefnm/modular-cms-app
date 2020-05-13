@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import * as yup from 'yup'
 import { Formik } from 'formik'
 import { useHistory, useParams } from 'react-router-dom'
@@ -25,7 +25,7 @@ export type ContentForm = {
 
 type Props = {}
 
-const CreateContentScreen: FunctionComponent<Props> = () => {
+const CreateContentScreen: FC<Props> = () => {
   const history = useHistory()
   const dispatch = useThunkDispatch()
 

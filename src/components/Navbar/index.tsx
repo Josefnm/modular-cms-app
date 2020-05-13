@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import * as actions from '../../store/actions'
 import { Container, SpaceBetween, StyledButton, StyledLink } from './styled'
@@ -7,7 +7,7 @@ import { useThunkDispatch } from '../../hooks/redux'
 
 type Props = {}
 
-const NavBar: FunctionComponent<Props> = () => {
+const NavBar: FC<Props> = () => {
   const dispatch = useThunkDispatch()
   const history = useHistory()
   const onLogout = () => {

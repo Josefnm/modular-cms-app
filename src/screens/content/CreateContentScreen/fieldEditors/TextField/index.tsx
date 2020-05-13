@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import CKEditor from '@ckeditor/ckeditor5-react'
 import InlineEditor from '@ckeditor/ckeditor5-build-inline'
 import { useFormikContext } from 'formik'
@@ -10,7 +10,7 @@ type Props = {
   field: string
 }
 
-const TextField: FunctionComponent<Props> = ({ field }) => {
+const TextField: FC<Props> = ({ field }) => {
   const { setFieldTouched, setFieldValue } = useFormikContext()
   const handleChange = editor => {
     setFieldValue(field, editor.getData())

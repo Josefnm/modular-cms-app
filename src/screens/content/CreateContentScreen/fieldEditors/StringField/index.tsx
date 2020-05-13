@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { Label, StyledErrorMessage } from '../styled'
 import { Heading5 } from '../../../../../styles/text'
 import { StyledField } from './styled'
@@ -8,7 +8,7 @@ type Props = {
   label?: string
 }
 
-const StringField: FunctionComponent<Props> = ({ name, label }) => {
+const StringField: FC<Props> = ({ name, label }) => {
   return (
     <Label htmlFor={name}>
       <Heading5 grey>{label || name}</Heading5>

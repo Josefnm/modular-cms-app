@@ -1,7 +1,7 @@
 import { PURGE } from 'redux-persist'
 import { AxiosError } from 'axios'
-import * as ActionTypes from '../actions/ActionTypes'
 import { MainState } from './index'
+import { TypeKey } from '../actions/ActionTypes'
 
 export type TemplateModel = {
   id?: string
@@ -12,6 +12,7 @@ export type TemplateModel = {
   name: string
   description?: string
   templateFields: TemplateFieldModel[]
+  ownerName?: string
 }
 
 export type TemplateFieldModel = {
@@ -45,11 +46,10 @@ const getProjectTemplatesFail = (state: TemplateState, action: any): TemplateSta
   error: action.error,
 })
 
-const createTemplateSuccess = (state: TemplateState, action: { data: TemplateModel }) => {
+const createTemplateSuccess = (state: TemplateState, action: any) => {
   return {
     ...state,
     error: null,
-    userTemplates: [action.data, ...state.projectTemplates],
   }
 }
 
@@ -63,14 +63,14 @@ export const getById = (state: MainState, id: string) => {
 
 export default (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
-    case ActionTypes.GET_PROJECT_TEMPLATES_SUCCESS:
+    case TypeKey.GET_PROJECT_TEMPLATES_SUCCESS:
       return getProjectTemplatesSuccess(state, action)
-    case ActionTypes.GET_PROJECT_TEMPLATES_FAIL:
+    case TypeKey.GET_PROJECT_TEMPLATES_FAIL:
       return getProjectTemplatesFail(state, action)
 
-    case ActionTypes.CREATE_TEMPLATE_SUCCESS:
+    case TypeKey.CREATE_TEMPLATE_SUCCESS:
       return createTemplateSuccess(state, action)
-    case ActionTypes.CREATE_TEMPLATE_FAIL:
+    case TypeKey.CREATE_TEMPLATE_FAIL:
       return createTemplateFail(state, action)
 
     case PURGE:

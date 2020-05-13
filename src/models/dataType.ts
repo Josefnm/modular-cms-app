@@ -1,5 +1,5 @@
 import {
-  AiOutlineFieldNumber,
+  BsHash,
   BsImage,
   BsLink,
   GoCalendar,
@@ -40,7 +40,7 @@ export const fieldTypes: FieldType[] = [
     type: DataType.STRING,
   },
   {
-    iconType: AiOutlineFieldNumber,
+    iconType: BsHash,
     headerText: 'Number',
     bodyText: 'ID, order number, rating, quantity',
     type: DataType.NUMBER,

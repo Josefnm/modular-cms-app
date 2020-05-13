@@ -1,20 +1,20 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
 import { MainState } from '../reducers'
-import { client } from '../../network/axios-client'
-import * as ActionTypes from './ActionTypes'
+import { client } from '../../config/axios-client'
 import { TemplateModel } from '../reducers/template.reducers'
+import { TypeKey } from './ActionTypes'
 
 const getProjectTemplatesSuccess = (templates: TemplateModel[]) => {
   return {
-    type: ActionTypes.GET_PROJECT_TEMPLATES_SUCCESS,
+    type: TypeKey.GET_PROJECT_TEMPLATES_SUCCESS,
     templates,
   }
 }
 
 const getProjectTemplatesFail = (error: string) => {
   return {
-    type: ActionTypes.GET_PROJECT_TEMPLATES_FAIL,
+    type: TypeKey.GET_PROJECT_TEMPLATES_FAIL,
     error,
   }
 }
@@ -29,6 +29,7 @@ export const getTemplates = () => async (
   try {
     const response = await client.get(`template/projectId/${selectedProject}`)
     const templates = response.data
+    console.log('templates', templates)
     dispatch(getProjectTemplatesSuccess(templates))
   } catch (error) {
     dispatch(getProjectTemplatesFail(error.message))
@@ -53,23 +54,23 @@ export const createTemplate = (templateForm: TemplateModel) => async (
   try {
     const response = await client.post(`/template`, template)
     console.log(response)
-    dispatch(createTemplateSuccess(response.data))
+    dispatch(createTemplateSuccess())
+    dispatch(getTemplates())
   } catch (error) {
     console.log(error)
-    dispatch(createTemplateFail(error.message))
+    dispatch(createTemplateFail(error.response.message))
   }
 }
 
-const createTemplateSuccess = (data: TemplateModel) => {
+const createTemplateSuccess = () => {
   return {
-    type: ActionTypes.CREATE_TEMPLATE_SUCCESS,
-    data,
+    type: TypeKey.CREATE_TEMPLATE_SUCCESS,
   }
 }
 
 const createTemplateFail = (action: Action) => {
   return {
-    type: ActionTypes.CREATE_TEMPLATE_FAIL,
+    type: TypeKey.CREATE_TEMPLATE_FAIL,
     error: action,
   }
 }

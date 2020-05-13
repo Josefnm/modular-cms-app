@@ -1,20 +1,21 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
 import { MainState } from '../reducers'
-import { client } from '../../network/axios-client'
-import * as ActionTypes from './ActionTypes'
+import { client } from '../../config/axios-client'
+
 import { ContentModel } from '../reducers/content.reducers'
+import { TypeKey } from './ActionTypes'
 
 const getOwnContentsSuccess = (contents: ContentModel[]) => {
   return {
-    type: ActionTypes.GET_PROJECT_CONTENT_SUCCESS,
+    type: TypeKey.GET_PROJECT_CONTENT_SUCCESS,
     contents,
   }
 }
 
 const getOwnContentsFail = (error: string) => {
   return {
-    type: ActionTypes.GET_PROJECT_CONTENT_FAIL,
+    type: TypeKey.GET_PROJECT_CONTENT_FAIL,
     error,
   }
 }
@@ -31,7 +32,8 @@ export const getContent = () => async (
     const contents = response.data
     dispatch(getOwnContentsSuccess(contents))
   } catch (error) {
-    dispatch(getOwnContentsFail(error.message))
+    console.log(error.response.message)
+    dispatch(getOwnContentsFail(error.response.message))
   }
 }
 
@@ -62,14 +64,14 @@ export const createContent = (contentForm: ContentModel) => async (
 
 const createContentSuccess = (data: ContentModel) => {
   return {
-    type: ActionTypes.CREATE_CONTENT_SUCCESS,
+    type: TypeKey.CREATE_CONTENT_SUCCESS,
     data,
   }
 }
 
 const createContentFail = (action: Action) => {
   return {
-    type: ActionTypes.CREATE_CONTENT_FAIL,
+    type: TypeKey.CREATE_CONTENT_FAIL,
     error: action,
   }
 }

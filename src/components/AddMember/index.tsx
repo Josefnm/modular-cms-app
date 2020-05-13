@@ -1,18 +1,12 @@
-import React, {
-  Dispatch,
-  FunctionComponent,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useMemo,
-} from 'react'
+import React, { Dispatch, FC, SetStateAction, useCallback, useEffect, useMemo } from 'react'
 import { FieldArrayRenderProps } from 'formik'
-import { ButtonContainer, Container, BodyContainer, SearchInput, TableContainer } from './styled'
+import { ButtonContainer, Container, BodyContainer, TableContainer } from './styled'
 import { SquareButton } from '../buttons'
 import ModalHeader from '../ModalHeader'
 import Table from '../Table'
 import { UserModel } from '../../store/reducers/user.reducers'
 import { useSimpleSearch } from '../../hooks/useSimpleSearch'
+import { SearchInput } from '../common'
 
 type Props = {
   setModalOpen: Dispatch<SetStateAction<boolean>>
@@ -20,7 +14,7 @@ type Props = {
   arrayHelpers: FieldArrayRenderProps
 }
 
-const AddMember: FunctionComponent<Props> = ({ projectId, setModalOpen, arrayHelpers }) => {
+const AddMember: FC<Props> = ({ projectId, setModalOpen, arrayHelpers }) => {
   const [users, searchUsers] = useSimpleSearch<UserModel[]>(
     `/user/search?projectId=${projectId}&searchString=`,
     []
@@ -38,7 +32,7 @@ const AddMember: FunctionComponent<Props> = ({ projectId, setModalOpen, arrayHel
     return users.map(user => {
       return {
         onClick: addMember(user),
-        values: [user.userName, user.email],
+        values: [user.name, user.email],
       }
     })
   }, [users, addMember])

@@ -13,15 +13,12 @@ body {
 
 html,
 body,
-#root{
-
+#root {
   margin: 0;
   padding: 0;
 }
 
 #root > div {
-
-
 }
 
 button {
@@ -41,6 +38,6 @@ a {
   max-height: 500px;
   cursor: text;
 }
-.ck.ck-editor__editable.ck-editor__editable_inline.ck-blurred{
-  border: #c3cfd5 1px solid ;
+.ck.ck-editor__editable.ck-editor__editable_inline.ck-blurred {
+  border: #c3cfd5 1px solid;
 }

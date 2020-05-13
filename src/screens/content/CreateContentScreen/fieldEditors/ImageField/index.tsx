@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { Label, StyledErrorMessage } from '../styled'
 import { FileButton, FileInput, Image } from './styled'
 import { Heading5 } from '../../../../../styles/text'
@@ -8,7 +8,7 @@ type Props = {
   name: string
 }
 
-const ImageField: FunctionComponent<Props> = ({ name }) => {
+const ImageField: FC<Props> = ({ name }) => {
   const [imageRef, imageName, saveImage] = useSaveImage()
 
   return (

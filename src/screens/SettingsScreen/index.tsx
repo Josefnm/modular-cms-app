@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useMemo, useState } from 'react'
+import React, { FC, useCallback, useMemo, useState } from 'react'
 import { FieldArray, Formik } from 'formik'
 import { MdSettings } from 'react-icons/all'
 import * as yup from 'yup'
@@ -11,7 +11,7 @@ import { HeaderPadding, ScreenContainer, SubHeader } from '../../components/comm
 import colors from '../../styles/colors'
 import { getSelectedProject } from '../../store/reducers/project.reducers'
 import validation from '../../utils/validation'
-import FormField from '../../components/FormField'
+import FormikField from '../../components/FormikField'
 import AddMember from '../../components/AddMember'
 import Modal from '../../components/Modal'
 import Table from '../../components/Table'
@@ -26,7 +26,7 @@ export type UpdateProjectForm = {
   members: UserModel[]
 }
 
-const SettingsScreen: FunctionComponent<Props> = () => {
+const SettingsScreen: FC<Props> = () => {
   const project = useSelector(state => getSelectedProject(state))
   const { projects } = useSelector(state => state.project)
   const { members } = useSelector(state => state.project)
@@ -49,7 +49,7 @@ const SettingsScreen: FunctionComponent<Props> = () => {
 
   const tableBody = useCallback((users: UserModel[]) => {
     return users.map(user => {
-      return { values: [user.userName, user.email] }
+      return { values: [user.name, user.email] }
     })
   }, [])
 
@@ -92,8 +92,8 @@ const SettingsScreen: FunctionComponent<Props> = () => {
               render={arrayHelpers => (
                 <>
                   <Container>
-                    <FormField name="name" type="text" label="Name" />
-                    <FormField
+                    <FormikField name="name" type="text" label="Name" />
+                    <FormikField
                       name="description"
                       type="text"
                       label="Description"

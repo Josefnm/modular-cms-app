@@ -1,17 +1,16 @@
 import { Dispatch } from 'redux'
-
-import * as ActionTypes from './ActionTypes'
 import { persistor } from '..'
+import { TypeKey } from './ActionTypes'
 
 export const resetAppStateSuccess = () => {
   return {
-    type: ActionTypes.RESET_APP_STATE_SUCCESS,
+    type: TypeKey.RESET_APP_STATE_SUCCESS,
   }
 }
 
 export const resetAppStateFail = () => {
   return {
-    type: ActionTypes.RESET_APP_STATE_FAIL,
+    type: TypeKey.RESET_APP_STATE_FAIL,
   }
 }
 

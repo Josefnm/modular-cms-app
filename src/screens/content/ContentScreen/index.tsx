@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
+import React, { FC, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import { RiFileEditLine } from 'react-icons/ri'
-import { ButtonContainer, Menu, MenuButton, MenuContainer, TableContainer } from './styled'
+import { ButtonContainer, Menu, MenuButton, TableContainer } from './styled'
 import { HeaderPadding, ScreenContainer, SubHeader } from '../../../components/common'
 import colors from '../../../styles/colors'
 import { Heading2, Heading4 } from '../../../styles/text'
@@ -11,61 +11,46 @@ import * as actions from '../../../store/actions'
 import { useSelector, useThunkDispatch } from '../../../hooks/redux'
 import Table from '../../../components/Table'
 import { useClickedOutside } from '../../../hooks/useClickOutside'
+import ContentSearch from '../../../components/ContentSearch'
+import { useContentSearch } from '../../../hooks/useContentSearch'
 
 type Props = {}
 
-const ContentScreen: FunctionComponent<Props> = () => {
-  const { projectContent } = useSelector(state => state.content)
+const ContentScreen: FC<Props> = () => {
+  const [contents, searchForm, dispatchForm] = useContentSearch()
   const { projectTemplates } = useSelector(state => state.template)
-  const userId = useSelector(state => state.user.profile.id)
   const dispatch = useThunkDispatch()
   const history = useHistory()
-  const wrapperRef = useRef(null)
 
-  const [menuOpen, setMenuOpen] = useClickedOutside(wrapperRef)
+  const [menuOpen, setOpen, wrapperRef] = useClickedOutside()
 
   useEffect(() => {
     dispatch(actions.getContent())
     dispatch(actions.getTemplates())
   }, [dispatch])
 
-  const ownerName = useCallback(
-    (ownerId: string) => {
-      return userId === ownerId ? 'Me' : ownerId
-    },
-    [userId]
-  )
-
-  const templateName = useCallback(
-    (templateId: string) => {
-      const temp = projectTemplates.find(template => template.id === templateId)
-      return temp ? temp.name : ''
-    },
-    [projectTemplates]
-  )
-
   const access = (isPublic: boolean) => (isPublic ? 'Public' : 'Private')
 
   const bodyValues = useMemo(() => {
-    return projectContent.map(content => {
+    return contents.map(content => {
       return {
         values: [
           content.name,
-          templateName(content.templateId),
-          ownerName(content.ownerId),
+          content.templateName,
+          content.ownerName,
           formatTimestamp(content.created),
           access(content.isPublic),
         ],
       }
     })
-  }, [ownerName, projectContent, templateName])
+  }, [contents])
 
   const listValues = useMemo(() => {
     return projectTemplates.map(template => (
       <MenuButton
         key={template.name}
         onClick={() => history.push(`/content/create/${template.id}`)}
-        width={200}
+        width={150}
       >
         {template.name}
       </MenuButton>
@@ -81,12 +66,13 @@ const ContentScreen: FunctionComponent<Props> = () => {
           <RiFileEditLine size={40} style={{ color: colors.greenLight }} />
           <Heading2 marginHorizontal={10}>Content</Heading2>
         </HeaderPadding>
-        <ButtonContainer>
-          <BlueSquareButton width={150} type="button" onClick={() => setMenuOpen(true)}>
-            Add Content
-          </BlueSquareButton>
-          <MenuContainer>
-            <Menu ref={wrapperRef} isOpen={menuOpen}>
+        <ContentSearch searchForm={searchForm} dispatchForm={dispatchForm} />
+        <ButtonContainer ref={wrapperRef}>
+          <div>
+            <BlueSquareButton width={150} type="button" onClick={() => setOpen(true)}>
+              Add Content
+            </BlueSquareButton>
+            <Menu isOpen={menuOpen}>
               {menuOpen && (
                 <>
                   <Heading4 marginVertical={10} marginLeft={25}>
@@ -96,7 +82,7 @@ const ContentScreen: FunctionComponent<Props> = () => {
                 </>
               )}
             </Menu>
-          </MenuContainer>
+          </div>
         </ButtonContainer>
       </SubHeader>
       <TableContainer>

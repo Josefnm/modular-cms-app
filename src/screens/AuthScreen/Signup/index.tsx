@@ -1,14 +1,14 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { Formik, FormikHelpers } from 'formik'
 import * as yup from 'yup'
 import validation from '../../../utils/validation'
 import * as actions from '../../../store/actions'
-import FormField from '../../../components/FormField'
+import FormikField from '../../../components/FormikField'
 import { ConfirmButton, StyledForm } from '../styled'
 import { useThunkDispatch } from '../../../hooks/redux'
 
 export type SignupForm = {
-  userName: string
+  name: string
   email: string
   password: string
   confirmPassword: string
@@ -16,7 +16,7 @@ export type SignupForm = {
 
 type Props = {}
 
-const Signup: FunctionComponent<Props> = () => {
+const Signup: FC<Props> = () => {
   const dispatch = useThunkDispatch()
 
   const onSignupPress = async (form: SignupForm, helpers: FormikHelpers<SignupForm>) => {
@@ -28,14 +28,14 @@ const Signup: FunctionComponent<Props> = () => {
   return (
     <Formik<SignupForm>
       initialValues={{
-        userName: '',
+        name: '',
         email: '',
         password: '',
         confirmPassword: '',
       }}
       onSubmit={onSignupPress}
       validationSchema={yup.object().shape({
-        userName: validation.userName,
+        name: validation.userName,
         email: validation.email,
         password: validation.password,
         confirmPassword: validation.confirmPassword,
@@ -43,10 +43,10 @@ const Signup: FunctionComponent<Props> = () => {
     >
       {({ isValid }) => (
         <StyledForm>
-          <FormField name="userName" type="text" label="Username" />
-          <FormField name="email" type="email" label="Email" />
-          <FormField name="password" type="password" label="Password" />
-          <FormField name="confirmPassword" type="password" label="Confirm password" />
+          <FormikField name="userName" type="text" label="Username" />
+          <FormikField name="email" type="email" label="Email" />
+          <FormikField name="password" type="password" label="Password" />
+          <FormikField name="confirmPassword" type="password" label="Confirm password" />
           <ConfirmButton disabled={!isValid} type="submit" margin="30px 0 0">
             Confirm
           </ConfirmButton>

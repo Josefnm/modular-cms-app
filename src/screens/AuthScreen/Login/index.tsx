@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { Formik, FormikHelpers } from 'formik'
 import * as yup from 'yup'
 import validation from '../../../utils/validation'
 import * as actions from '../../../store/actions'
-import FormField from '../../../components/FormField'
+import FormikField from '../../../components/FormikField'
 import { ConfirmButton, StyledForm } from '../styled'
 import { useThunkDispatch } from '../../../hooks/redux'
 
@@ -14,7 +14,7 @@ export type LoginForm = {
 
 type Props = {}
 
-const Login: FunctionComponent<Props> = () => {
+const Login: FC<Props> = () => {
   const dispatch = useThunkDispatch()
 
   const onSignupPress = async (form: LoginForm, helpers: FormikHelpers<LoginForm>) => {
@@ -35,8 +35,8 @@ const Login: FunctionComponent<Props> = () => {
     >
       {({ isValid }) => (
         <StyledForm>
-          <FormField name="email" type="email" label="Email" />
-          <FormField name="password" type="password" label="Password" />
+          <FormikField name="email" type="email" label="Email" />
+          <FormikField name="password" type="password" label="Password" />
           <ConfirmButton disabled={!isValid} type="submit" margin="25px 0 0">
             Confirm
           </ConfirmButton>

@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 import { Container } from './styled'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   onClose?: () => any
 }
 
-const Modal: FunctionComponent<Props> = ({ isOpen, children, setIsOpen, onClose }) => {
+const Modal: FC<Props> = ({ isOpen, children, setIsOpen, onClose }) => {
   if (!isOpen) return null
 
   const stopPropagation = (event: React.MouseEvent) => event.stopPropagation()

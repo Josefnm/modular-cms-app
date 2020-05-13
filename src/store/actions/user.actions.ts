@@ -3,51 +3,51 @@ import { Action } from 'redux'
 import firebase from 'firebase/app'
 import { MainState } from '../reducers'
 import 'firebase/auth'
-import { client, clientNoAuth } from '../../network/axios-client'
-import * as ActionTypes from './ActionTypes'
+import { client, clientNoAuth } from '../../config/axios-client'
 import { UserModel } from '../reducers/user.reducers'
 import * as actions from '.'
 import { SignupForm } from '../../screens/AuthScreen/Signup'
 import { LoginForm } from '../../screens/AuthScreen/Login'
+import { TypeKey } from './ActionTypes'
 
 const signupSuccess = (user: UserModel) => {
   return {
-    type: ActionTypes.SIGNUP_SUCCESS,
+    type: TypeKey.SIGNUP_SUCCESS,
     user,
   }
 }
 
 const signupFail = (error: string) => {
   return {
-    type: ActionTypes.SIGNUP_FAIL,
+    type: TypeKey.SIGNUP_FAIL,
     error,
   }
 }
 
 const loginSuccess = (user: UserModel) => {
   return {
-    type: ActionTypes.LOGIN_SUCCESS,
+    type: TypeKey.LOGIN_SUCCESS,
     user,
   }
 }
 
 const loginFail = (error: string) => {
   return {
-    type: ActionTypes.LOGIN_FAIL,
+    type: TypeKey.LOGIN_FAIL,
     error,
   }
 }
 
 const getProfileSuccess = (user: UserModel) => {
   return {
-    type: ActionTypes.GET_PROFILE_SUCCESS,
+    type: TypeKey.GET_PROFILE_SUCCESS,
     user,
   }
 }
 
 const getProfileFail = (error: string) => {
   return {
-    type: ActionTypes.GET_PROFILE_FAIL,
+    type: TypeKey.GET_PROFILE_FAIL,
     error,
   }
 }

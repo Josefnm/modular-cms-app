@@ -28,7 +28,6 @@ export const Overlay = styled.div`
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
   flex: 1;
-
   background-color: rgba(0, 0, 0, 0.5);
 `
 

@@ -1,17 +1,20 @@
-import { Dispatch, MutableRefObject, SetStateAction, useEffect, useState } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 
 /**
  * sets state to false when clicking on anything other than referenced element
  * @param ref referance to element
  */
-export const useClickedOutside = (
-  ref: MutableRefObject<any>
-): [boolean, Dispatch<SetStateAction<boolean>>] => {
+export const useClickedOutside = (): [
+  boolean,
+  (value: ((prevState: boolean) => boolean) | boolean) => void,
+  MutableRefObject<null>
+] => {
   const [open, setOpen] = useState(false)
 
+  const wrapperRef = useRef(null)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setOpen(false)
       }
     }
@@ -20,7 +23,7 @@ export const useClickedOutside = (
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [ref])
+  }, [wrapperRef])
 
-  return [open, setOpen]
+  return [open, setOpen, wrapperRef]
 }

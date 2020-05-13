@@ -1,10 +1,10 @@
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { useHistory } from 'react-router-dom'
 import { ButtonContainer, Container, StyledForm } from './styled'
 import validation from '../../utils/validation'
-import FormField from '../FormField'
+import FormikField from '../FormikField'
 import { GreenSquareButton, SquareButton } from '../buttons'
 import ModalHeader from '../ModalHeader'
 
@@ -20,7 +20,7 @@ type Props = {
   title: TitleForm
 }
 
-const NamePicker: FunctionComponent<Props> = ({ usedNames, setModalOpen, setTitle, title }) => {
+const NamePicker: FC<Props> = ({ usedNames, setModalOpen, setTitle, title }) => {
   const history = useHistory()
 
   const onSubmit = (form: TitleForm) => {
@@ -49,8 +49,8 @@ const NamePicker: FunctionComponent<Props> = ({ usedNames, setModalOpen, setTitl
       >
         {({ isValid }) => (
           <StyledForm>
-            <FormField name="name" type="text" label="Name" />
-            <FormField name="description" type="text" label="Description" component="textarea" />
+            <FormikField name="name" type="text" label="Name" />
+            <FormikField name="description" type="text" label="Description" component="textarea" />
             <ButtonContainer>
               <GreenSquareButton disabled={!isValid} type="submit" margin="0 16px 0 0">
                 Save
