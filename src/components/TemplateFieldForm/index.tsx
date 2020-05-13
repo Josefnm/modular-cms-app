@@ -1,8 +1,8 @@
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 import * as yup from 'yup'
 import { Formik } from 'formik'
 import validation from '../../utils/validation'
-import FormField from '../FormField'
+import FormikField from '../FormikField'
 import { GreenSquareButton, SquareButton } from '../buttons'
 import { ButtonContainer, StyledForm } from './styled'
 import { FieldType } from '../../models/dataType'
@@ -17,7 +17,7 @@ type FieldTypeForm = {
   fieldName: string
 }
 
-const FieldForm: FunctionComponent<Props> = ({ usedNames, onSubmit, setDataType }) => {
+const TemplateFieldForm: FC<Props> = ({ usedNames, onSubmit, setDataType }) => {
   return (
     <Formik<FieldTypeForm>
       initialValues={{
@@ -30,7 +30,7 @@ const FieldForm: FunctionComponent<Props> = ({ usedNames, onSubmit, setDataType 
     >
       {({ isValid }) => (
         <StyledForm>
-          <FormField name="fieldName" type="text" label="Name" width={257} />
+          <FormikField name="fieldName" type="text" label="Name" width={257} />
           <ButtonContainer>
             <GreenSquareButton disabled={!isValid} type="submit" margin="0 16px 0 0">
               Create
@@ -43,4 +43,4 @@ const FieldForm: FunctionComponent<Props> = ({ usedNames, onSubmit, setDataType 
   )
 }
 
-export default FieldForm
+export default TemplateFieldForm

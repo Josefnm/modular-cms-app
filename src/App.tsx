@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen'
 import NavBar from './components/Navbar'
@@ -13,11 +13,11 @@ import { useAuth } from './hooks/useAuth'
 type OwnProps = {}
 type Props = OwnProps
 
-const App: FunctionComponent<Props> = () => {
+const App: FC<Props> = () => {
   const [loading, loggedIn] = useAuth()
 
   return (
-    <div>
+    <div style={{ marginTop: '70px' }}>
       {/* directs user to login page or home page depending on if they are logged in,
       shows navbar and makes other paths available if logged in  */}
       {loggedIn && <NavBar />}

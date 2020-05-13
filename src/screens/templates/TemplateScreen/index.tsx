@@ -1,60 +1,52 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo } from 'react'
+import React, { FC, useEffect, useMemo } from 'react'
 import { BsPuzzle } from 'react-icons/bs'
 import { useHistory } from 'react-router-dom'
 import * as actions from '../../../store/actions'
-import { Container, TableContainer } from './styled'
-import { useSelector, useThunkDispatch } from '../../../hooks/redux'
+import { SearchInput, TableContainer } from './styled'
+import { useThunkDispatch } from '../../../hooks/redux'
 import { formatTimestamp } from '../../../utils/timeUtils'
 import colors from '../../../styles/colors'
 import { Heading2 } from '../../../styles/text'
 import { BlueSquareButton } from '../../../components/buttons'
-import { HeaderPadding, SubHeader } from '../../../components/common'
+import { HeaderPadding, ScreenContainer, SubHeader } from '../../../components/common'
 import Table from '../../../components/Table'
+import { useTemplateSearch } from '../../../hooks/useTemplateSearch'
 
 type Props = {}
 
-const TemplateScreen: FunctionComponent<Props> = () => {
-  const { projectTemplates } = useSelector(state => state.template)
-  const userId = useSelector(state => state.user.profile.id)
+const TemplateScreen: FC<Props> = () => {
   const dispatch = useThunkDispatch()
-  const history = useHistory()
-
-  const navigateToCreateTemplate = () => history.push('/templates/create')
-
   useEffect(() => {
     dispatch(actions.getTemplates())
   }, [dispatch])
-
-  const ownerName = useCallback(
-    (ownerId: string) => {
-      return userId === ownerId ? 'Me' : ownerId
-    },
-    [userId]
-  )
+  const history = useHistory()
+  const [templates, searchTemplates] = useTemplateSearch()
+  const navigateToCreateTemplate = () => history.push('/templates/create')
 
   const rowValues = useMemo(() => {
-    return projectTemplates.map((template, index) => {
+    return templates.map((template, index) => {
       return {
         values: [
           template.name,
           template.description,
           template.templateFields.length.toString(),
           formatTimestamp(template.created),
-          ownerName(template.ownerId),
+          template.ownerName,
         ],
       }
     })
-  }, [ownerName, projectTemplates])
+  }, [templates])
 
   const headerValues = ['Name', 'Description', 'Fields', 'Created', 'By']
 
   return (
-    <Container>
+    <ScreenContainer>
       <SubHeader>
         <HeaderPadding>
           <BsPuzzle size={40} style={{ color: colors.greenLight }} />
           <Heading2 marginHorizontal={10}>Templates</Heading2>
         </HeaderPadding>
+        <SearchInput type="text" onChange={searchTemplates} placeholder="Search..." />
         <HeaderPadding>
           <BlueSquareButton type="button" onClick={navigateToCreateTemplate}>
             Add Template
@@ -64,7 +56,7 @@ const TemplateScreen: FunctionComponent<Props> = () => {
       <TableContainer>
         <Table headerValues={headerValues} bodyValues={rowValues} />
       </TableContainer>
-    </Container>
+    </ScreenContainer>
   )
 }
 

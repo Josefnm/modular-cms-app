@@ -28,12 +28,3 @@ export const TableContainer = styled.div`
 export const ButtonContainer = styled(RowContainer)`
   margin-top: 15px;
 `
-
-export const SearchInput = styled.input`
-  padding: 0 5px;
-  height: 50px;
-  font-size: 16px;
-  margin-bottom: 10px;
-  resize: vertical;
-  border: 1px solid ${colors.grey4};
-`

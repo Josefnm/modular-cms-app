@@ -1,14 +1,13 @@
-import React, { Dispatch, FunctionComponent, SetStateAction, useMemo } from 'react'
+import React, { Dispatch, FC, SetStateAction, useMemo } from 'react'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { useHistory } from 'react-router-dom'
-import { Container, StyledForm } from './styled'
+import { ButtonContainer, Container, StyledForm } from './styled'
 import validation from '../../utils/validation'
-import FormField from '../FormField'
+import FormikField from '../FormikField'
 import { GreenSquareButton, SquareButton } from '../buttons'
 import ModalHeader from '../ModalHeader'
 import Modal from '../Modal'
-import { RowContainer } from '../common'
 import * as actions from '../../store/actions'
 import { useSelector, useThunkDispatch } from '../../hooks/redux'
 
@@ -22,7 +21,7 @@ type Props = {
   setModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const CreateProject: FunctionComponent<Props> = ({ modalOpen, setModalOpen }) => {
+const CreateProject: FC<Props> = ({ modalOpen, setModalOpen }) => {
   const dispatch = useThunkDispatch()
   const history = useHistory()
   const { projects } = useSelector(state => state.project)
@@ -54,14 +53,19 @@ const CreateProject: FunctionComponent<Props> = ({ modalOpen, setModalOpen }) =>
         >
           {({ isValid }) => (
             <StyledForm>
-              <FormField name="name" type="text" label="Name" />
-              <FormField name="description" type="text" label="Description" component="textarea" />
-              <RowContainer>
+              <FormikField name="name" type="text" label="Name" />
+              <FormikField
+                name="description"
+                type="text"
+                label="Description"
+                component="textarea"
+              />
+              <ButtonContainer>
                 <GreenSquareButton disabled={!isValid} type="submit" margin="0 16px 0 0">
                   Save
                 </GreenSquareButton>
                 <SquareButton onClick={() => setModalOpen(false)}>Cancel</SquareButton>
-              </RowContainer>
+              </ButtonContainer>
             </StyledForm>
           )}
         </Formik>

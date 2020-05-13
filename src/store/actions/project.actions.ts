@@ -1,27 +1,14 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { Action } from 'redux'
 import { MainState } from '../reducers'
-import { client } from '../../network/axios-client'
-import * as ActionTypes from './ActionTypes'
+import { client } from '../../config/axios-client'
+
 import { ProjectModel } from '../reducers/project.reducers'
 import * as actions from '.'
 import { ProjectForm } from '../../components/CreateProject'
 import { UserModel } from '../reducers/user.reducers'
 import { UpdateProjectForm } from '../../screens/SettingsScreen'
-
-const getOwnProjectsSuccess = (projects: ProjectModel[]) => {
-  return {
-    type: ActionTypes.GET_OWN_PROJECTS_SUCCESS,
-    projects,
-  }
-}
-
-const getOwnProjectsFail = (error: string) => {
-  return {
-    type: ActionTypes.GET_OWN_PROJECTS_FAIL,
-    error,
-  }
-}
+import { TypeKey } from './ActionTypes'
 
 export const getProjects = () => async (dispatch: ThunkDispatch<MainState, {}, Action>) => {
   try {
@@ -33,6 +20,20 @@ export const getProjects = () => async (dispatch: ThunkDispatch<MainState, {}, A
   } catch (error) {
     console.log('get own projects error', error.message)
     dispatch(getOwnProjectsFail(error.message))
+  }
+}
+
+const getOwnProjectsSuccess = (projects: ProjectModel[]) => {
+  return {
+    type: TypeKey.GET_OWN_PROJECTS_SUCCESS,
+    projects,
+  }
+}
+
+const getOwnProjectsFail = (error: string) => {
+  return {
+    type: TypeKey.GET_OWN_PROJECTS_FAIL,
+    error,
   }
 }
 
@@ -62,14 +63,14 @@ export const createProject = (projectForm: ProjectForm) => async (
 
 const createProjectSuccess = (data: ProjectModel) => {
   return {
-    type: ActionTypes.CREATE_PROJECT_SUCCESS,
+    type: TypeKey.CREATE_PROJECT_SUCCESS,
     data,
   }
 }
 
 const createProjectFail = (action: Action) => {
   return {
-    type: ActionTypes.CREATE_PROJECT_FAIL,
+    type: TypeKey.CREATE_PROJECT_FAIL,
     error: action,
   }
 }
@@ -99,14 +100,14 @@ export const updateProject = (form: UpdateProjectForm) => async (
 
 const updateProjectSuccess = (data: ProjectModel) => {
   return {
-    type: ActionTypes.UPDATE_PROJECT_SUCCESS,
+    type: TypeKey.UPDATE_PROJECT_SUCCESS,
     data,
   }
 }
 
 const updateProjectFail = (action: Action) => {
   return {
-    type: ActionTypes.UPDATE_PROJECT_FAIL,
+    type: TypeKey.UPDATE_PROJECT_FAIL,
     error: action,
   }
 }
@@ -129,27 +130,27 @@ export const deleteProject = (projectId: string) => async (
 
 const deleteProjectSuccess = () => {
   return {
-    type: ActionTypes.DELETE_PROJECT_SUCCESS,
+    type: TypeKey.DELETE_PROJECT_SUCCESS,
   }
 }
 
 const deleteProjectFail = (action: Action) => {
   return {
-    type: ActionTypes.DELETE_PROJECT_FAIL,
+    type: TypeKey.DELETE_PROJECT_FAIL,
     error: action,
   }
 }
 
 const selectProjectSuccess = (projectId: string) => {
   return {
-    type: ActionTypes.SELECT_PROJECT_SUCCESS,
+    type: TypeKey.SELECT_PROJECT_SUCCESS,
     data: projectId,
   }
 }
 
 const selectProjectFail = (error: string) => {
   return {
-    type: ActionTypes.SELECT_PROJECT_FAIL,
+    type: TypeKey.SELECT_PROJECT_FAIL,
     error,
   }
 }
@@ -190,14 +191,14 @@ export const getMembers = (projectId: string) => async (
 
 const getMembersSuccess = (members: UserModel[]) => {
   return {
-    type: ActionTypes.GET_MEMBERS_SUCCESS,
+    type: TypeKey.GET_MEMBERS_SUCCESS,
     members,
   }
 }
 
 const getMembersFail = (action: Action) => {
   return {
-    type: ActionTypes.GET_MEMBERS_FAIL,
+    type: TypeKey.GET_MEMBERS_FAIL,
     error: action,
   }
 }

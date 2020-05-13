@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useFormikContext } from 'formik'
 import { Label, StyledErrorMessage } from '../styled'
 import { Heading4, Heading5 } from '../../../../../styles/text'
@@ -15,12 +15,12 @@ type Props = {
 
 type ContentModelWithName = ContentModel & { templateName: string }
 
-const ModuleField: FunctionComponent<Props> = ({ name }) => {
+const ModuleField: FC<Props> = ({ name }) => {
   const { setFieldTouched, setFieldValue } = useFormikContext()
 
   const projectContent = useSelector(state => state.content.projectContent)
   const projectTemplates = useSelector(state => state.template.projectTemplates)
-  const [modalOpen, setModalOpen] = useState(true)
+  const [modalOpen, setModalOpen] = useState(false)
   const [selectedContent, setSelectedContent] = useState<ContentModelWithName>(undefined)
 
   useEffect(() => {

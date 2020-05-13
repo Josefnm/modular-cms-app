@@ -1,9 +1,9 @@
-import React, { Dispatch, FunctionComponent, SetStateAction, useMemo, useState } from 'react'
+import React, { Dispatch, FC, SetStateAction, useMemo, useState } from 'react'
 import { Container, FieldContainer } from './styled'
 import FieldTypeCard from './FieldType'
 import { FieldType, fieldTypes } from '../../models/dataType'
 import { TemplateFieldModel } from '../../store/reducers/template.reducers'
-import FieldForm from '../FieldForm'
+import TemplateFieldForm from '../TemplateFieldForm'
 import ModalHeader from '../ModalHeader'
 
 type FieldTypeForm = {
@@ -16,7 +16,7 @@ type Props = {
   setModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const FieldPicker: FunctionComponent<Props> = ({ pushField, usedNames, setModalOpen }) => {
+const FieldPicker: FC<Props> = ({ pushField, usedNames, setModalOpen }) => {
   const onChooseType = (fieldType: FieldType) => () => setTypeChosen(fieldType)
   const fields = useMemo(() => {
     return fieldTypes.map((fieldType, index) => {
@@ -50,7 +50,11 @@ const FieldPicker: FunctionComponent<Props> = ({ pushField, usedNames, setModalO
         {!typeChosen ? (
           fields
         ) : (
-          <FieldForm usedNames={usedNames} onSubmit={onSubmit} setDataType={setTypeChosen} />
+          <TemplateFieldForm
+            usedNames={usedNames}
+            onSubmit={onSubmit}
+            setDataType={setTypeChosen}
+          />
         )}
       </FieldContainer>
     </Container>

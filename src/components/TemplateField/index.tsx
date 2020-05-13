@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import { FieldArrayRenderProps } from 'formik'
 import {
   Container,
@@ -24,7 +24,7 @@ const iconStyle = {
   style: { color: colors.greenExtraLight },
 }
 
-const TemplateField: FunctionComponent<Props> = ({ templateField, arrayHelpers, index }) => {
+const TemplateField: FC<Props> = ({ templateField, arrayHelpers, index }) => {
   const deleteThis = () => arrayHelpers.remove(index)
 
   const fieldType = useMemo(() => {

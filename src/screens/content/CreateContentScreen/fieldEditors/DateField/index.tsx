@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import DateTimePicker from 'react-datetime-picker'
 import { useFormikContext } from 'formik'
 import { Heading5 } from '../../../../../styles/text'
@@ -8,7 +8,7 @@ type Props = {
   name: string
 }
 
-const DateField: FunctionComponent<Props> = ({ name }) => {
+const DateField: FC<Props> = ({ name }) => {
   const { setFieldTouched, setFieldValue, values } = useFormikContext()
   const handleChange = (dateTime: string) => {
     setFieldValue(name, dateTime)

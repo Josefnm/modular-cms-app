@@ -9,7 +9,6 @@ export const StyledForm = styled(Form)`
 `
 
 export const FormContainer = styled(ColumnContainer)`
-  margin-top: 50px;
   background-color: ${colors.white};
   padding: 20px;
   border-radius: 4px;
@@ -25,7 +24,14 @@ export const LinkButtonContainer = styled(RowContainer)`
 export const Container = styled(ColumnContainer)`
   background: ${colors.grey7};
   align-items: center;
+  display: flex;
+  justify-content: center;
   flex: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `
 
 export const ConfirmButton = styled(BlueSquareButton)`

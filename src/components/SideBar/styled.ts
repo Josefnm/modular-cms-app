@@ -11,7 +11,7 @@ export const Container = styled.div`
   animation: ${SlideIn};
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
@@ -28,8 +28,7 @@ export const Overlay = styled.div`
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
   flex: 1;
-  background: black;
-  opacity: 0.5;
+  background-color: rgba(0, 0, 0, 0.5);
 `
 
 export const RowContainer = styled.div`
@@ -44,7 +43,7 @@ export const SideArea = styled.div`
   width: 350px;
   display: flex;
   flex-direction: column;
-  background: white;
+  background-color: white;
 `
 
 export const NavBarButton = styled(ButtonBase)`
@@ -53,11 +52,11 @@ export const NavBarButton = styled(ButtonBase)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  min-width: 200px;
+  min-width: 250px;
   text-decoration: none;
   color: white;
   box-shadow: inset -1px 0 2px 0 rgba(0, 0, 0, 0.4), inset -2px 0 5px 0 rgba(0, 0, 0, 0.35);
-  background-color: ${colors.blueDark};
+  background-color: ${colors.blueExtraDark};
   border-width: 0;
   height: 100%;
 `

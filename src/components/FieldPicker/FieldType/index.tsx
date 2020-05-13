@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { IconType } from 'react-icons'
 import { FieldTypeButton, IconContainer, StyledHeading3 } from './styled'
 import { Heading2 } from '../../../styles/text'
@@ -13,7 +13,7 @@ type Props = {
   onClick: (string) => void
 }
 
-const FieldTypeCard: FunctionComponent<Props> = ({ iconType, headerText, bodyText, onClick }) => {
+const FieldTypeCard: FC<Props> = ({ iconType, headerText, bodyText, onClick }) => {
   return (
     <FieldTypeButton onClick={onClick}>
       <IconContainer>{React.createElement(iconType, { ...iconStyle })}</IconContainer>

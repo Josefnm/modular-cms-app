@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { Label, StyledErrorMessage, StyledField } from './styled'
 import { Heading5 } from '../../styles/text'
 
@@ -11,14 +11,7 @@ type Props = {
   component?: string
 }
 
-const FormField: FunctionComponent<Props> = ({
-  name,
-  label,
-  type,
-  placeholder,
-  width,
-  component = 'input',
-}) => {
+const FormikField: FC<Props> = ({ name, label, type, placeholder, width, component = 'input' }) => {
   return (
     <Label htmlFor={name} width={width}>
       {label && <Heading5 marginTop={10}>{label}</Heading5>}
@@ -34,4 +27,4 @@ const FormField: FunctionComponent<Props> = ({
   )
 }
 
-export default FormField
+export default FormikField

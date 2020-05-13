@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useMemo } from 'react'
-import { BsPuzzle } from 'react-icons/bs'
+import React, { FC, useMemo } from 'react'
 import * as yup from 'yup'
 import { Formik } from 'formik'
 import { useHistory, useParams } from 'react-router-dom'
+import { RiFileEditLine } from 'react-icons/ri'
 import * as actions from '../../../store/actions'
 import { ContentModel } from '../../../store/reducers/content.reducers'
 import { FieldContainer, StyledForm } from './styled'
@@ -11,7 +11,7 @@ import colors from '../../../styles/colors'
 import { Heading2, Heading5 } from '../../../styles/text'
 import validation, { generateValidators } from '../../../utils/validation'
 import { useSelector, useThunkDispatch } from '../../../hooks/redux'
-import { HeaderPadding, SubHeader } from '../../../components/common'
+import { HeaderPadding, ScreenContainer, SubHeader } from '../../../components/common'
 import { getById } from '../../../store/reducers/template.reducers'
 import StringField from './fieldEditors/StringField'
 import { generateContentFields, templateFieldNames } from './utils'
@@ -25,7 +25,7 @@ export type ContentForm = {
 
 type Props = {}
 
-const CreateContentScreen: FunctionComponent<Props> = () => {
+const CreateContentScreen: FC<Props> = () => {
   const history = useHistory()
   const dispatch = useThunkDispatch()
 
@@ -69,11 +69,11 @@ const CreateContentScreen: FunctionComponent<Props> = () => {
       })}
     >
       {({ values }) => (
-        <>
+        <ScreenContainer>
           <StyledForm>
             <SubHeader>
               <HeaderPadding>
-                <BsPuzzle size={40} style={{ color: colors.greenLight }} />
+                <RiFileEditLine size={40} style={{ color: colors.greenLight }} />
                 <Heading2 marginHorizontal={10}>{template.name}</Heading2>
                 <Heading5 marginHorizontal={10}>{values.contentName}</Heading5>
               </HeaderPadding>
@@ -81,7 +81,9 @@ const CreateContentScreen: FunctionComponent<Props> = () => {
                 <GreenSquareButton type="submit" margin="0 16px">
                   Save
                 </GreenSquareButton>
-                <SquareButton onClick={navigateToContent} type="button">Cancel</SquareButton>
+                <SquareButton onClick={navigateToContent} type="button">
+                  Cancel
+                </SquareButton>
               </HeaderPadding>
             </SubHeader>
             <FieldContainer>
@@ -90,7 +92,7 @@ const CreateContentScreen: FunctionComponent<Props> = () => {
               <ContentFields templateFields={template.templateFields} />
             </FieldContainer>
           </StyledForm>
-        </>
+        </ScreenContainer>
       )}
     </Formik>
   )

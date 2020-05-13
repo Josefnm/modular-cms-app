@@ -19,7 +19,7 @@ export const useAuth = () => {
         console.log('auth state change', user)
         if (user) {
           await dispatch(actions.getProfile())
-          await dispatch(actions.getProjects())
+          dispatch(actions.getProjects())
           setLoggedIn(true)
         } else {
           setLoggedIn(false)

@@ -1,8 +1,8 @@
 import { PURGE } from 'redux-persist'
 import { AxiosError } from 'axios'
-import * as ActionTypes from '../actions/ActionTypes'
 import { MainState } from './index'
 import { UserModel } from './user.reducers'
+import { TypeKey } from '../actions/ActionTypes'
 
 export type ProjectModel = {
   id?: string
@@ -115,29 +115,29 @@ export const getSelectedProject = (state: MainState) => {
 
 export default (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
-    case ActionTypes.GET_OWN_PROJECTS_SUCCESS:
+    case TypeKey.GET_OWN_PROJECTS_SUCCESS:
       return getOwnProjectsSuccess(state, action)
-    case ActionTypes.GET_OWN_PROJECTS_FAIL:
+    case TypeKey.GET_OWN_PROJECTS_FAIL:
       return getOwnProjectsFail(state, action)
 
-    case ActionTypes.CREATE_PROJECT_SUCCESS:
+    case TypeKey.CREATE_PROJECT_SUCCESS:
       return createProjectSuccess(state, action)
-    case ActionTypes.CREATE_PROJECT_FAIL:
+    case TypeKey.CREATE_PROJECT_FAIL:
       return createProjectFail(state, action)
 
-    case ActionTypes.SELECT_PROJECT_SUCCESS:
+    case TypeKey.SELECT_PROJECT_SUCCESS:
       return selectProjectSuccess(state, action)
-    case ActionTypes.SELECT_PROJECT_FAIL:
+    case TypeKey.SELECT_PROJECT_FAIL:
       return selectProjectFail(state, action)
 
-    case ActionTypes.UPDATE_PROJECT_SUCCESS:
+    case TypeKey.UPDATE_PROJECT_SUCCESS:
       return updateProjectSuccess(state, action)
-    case ActionTypes.UPDATE_PROJECT_FAIL:
+    case TypeKey.UPDATE_PROJECT_FAIL:
       return updateProjectFail(state, action)
 
-    case ActionTypes.GET_MEMBERS_SUCCESS:
+    case TypeKey.GET_MEMBERS_SUCCESS:
       return getMembersSuccess(state, action)
-    case ActionTypes.GET_MEMBERS_FAIL:
+    case TypeKey.GET_MEMBERS_FAIL:
       return getMembersFail(state, action)
 
     case PURGE:

@@ -1,6 +1,6 @@
 import { PURGE } from 'redux-persist'
 import { AxiosError } from 'axios'
-import * as ActionTypes from '../actions/ActionTypes'
+import { TypeKey } from '../actions/ActionTypes'
 
 export type ContentModel = {
   id?: string
@@ -13,6 +13,8 @@ export type ContentModel = {
   description?: string
   isPublic?: boolean
   contentFields: ContentFieldModel[]
+  ownerName?: string
+  templateName?: string
 }
 
 export type ContentFieldModel = {
@@ -60,14 +62,14 @@ const createContentFail = (state: ContentState, action: { error: AxiosError }) =
 }
 export default (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
-    case ActionTypes.GET_OWN_CONTENT_SUCCESS:
+    case TypeKey.GET_PROJECT_CONTENT_SUCCESS:
       return getProjectContentsSuccess(state, action)
-    case ActionTypes.GET_OWN_CONTENT_FAIL:
+    case TypeKey.GET_PROJECT_CONTENT_FAIL:
       return getProjectContentsFail(state, action)
 
-    case ActionTypes.CREATE_CONTENT_SUCCESS:
+    case TypeKey.CREATE_CONTENT_SUCCESS:
       return createContentSuccess(state, action)
-    case ActionTypes.CREATE_CONTENT_FAIL:
+    case TypeKey.CREATE_CONTENT_FAIL:
       return createContentFail(state, action)
 
     case PURGE:

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { Field } from 'formik'
 import { StyledErrorMessage } from '../styled'
 import { Heading5 } from '../../../../../styles/text'
@@ -9,7 +9,7 @@ type Props = {
   label?: string
 }
 
-const BoolField: FunctionComponent<Props> = ({ name, label }) => {
+const BoolField: FC<Props> = ({ name, label }) => {
   return (
     <Container>
       <Heading5 grey marginBottom={5}>

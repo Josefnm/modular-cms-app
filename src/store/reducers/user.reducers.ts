@@ -1,10 +1,12 @@
 import { PURGE } from 'redux-persist'
-import * as ActionTypes from '../actions/ActionTypes'
+import { TypeKey } from '../actions/ActionTypes'
 
 export type UserModel = {
-  id: string
-  userName: string
+  id?: string
+  name: string
   email: string
+  created?: string
+  updated?: string
 }
 
 export type UserState = {
@@ -14,7 +16,7 @@ export type UserState = {
 
 const emptyProfile = {
   id: '',
-  userName: '',
+  name: '',
   email: '',
 }
 
@@ -64,19 +66,19 @@ const getProfileFail = (state: UserState, action: any) => ({
 
 export default (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
-    case ActionTypes.SIGNUP_SUCCESS:
+    case TypeKey.SIGNUP_SUCCESS:
       return signupSuccess(state, action)
-    case ActionTypes.SIGNUP_FAIL:
+    case TypeKey.SIGNUP_FAIL:
       return signupFail(state, action)
 
-    case ActionTypes.LOGIN_SUCCESS:
+    case TypeKey.LOGIN_SUCCESS:
       return loginSuccess(state, action)
-    case ActionTypes.LOGIN_FAIL:
+    case TypeKey.LOGIN_FAIL:
       return loginFail(state, action)
 
-    case ActionTypes.GET_PROFILE_SUCCESS:
+    case TypeKey.GET_PROFILE_SUCCESS:
       return getProfileSuccess(state, action)
-    case ActionTypes.GET_PROFILE_FAIL:
+    case TypeKey.GET_PROFILE_FAIL:
       return getProfileFail(state, action)
 
     case PURGE:

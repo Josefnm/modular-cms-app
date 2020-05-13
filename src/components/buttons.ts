@@ -57,6 +57,17 @@ export const BlueSquareButton = styled(SquareButton)<props>`
   }
 `
 
+export const SearchButton = styled(SquareButton)<props>`
+  border-radius: 0 3px 3px 0;
+  border: 0;
+  height: 100%;
+  background-color: ${colors.blueLight};
+  color: ${colors.grey7};
+  :hover {
+    background-color: ${colors.blueMedium};
+  }
+`
+
 export const LinkButton = styled(ButtonBase)<props>`
   text-decoration: underline;
   border-width: 0;
